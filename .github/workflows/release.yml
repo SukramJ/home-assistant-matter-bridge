@@ -114,7 +114,7 @@ jobs:
             CHANGELOG.md
 
       - name: Upload Package Artifact
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: package.tgz
           path: apps/home-assistant-matter-hub/package.tgz
@@ -158,7 +158,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Download Package Artifact
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
         with:
           name: package.tgz
           path: apps/home-assistant-matter-hub/
