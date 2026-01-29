@@ -3,6 +3,7 @@
 
 # IDEs
 .idea/
+.claude/
 
 # Personal Configs
 .env

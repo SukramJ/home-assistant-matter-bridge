@@ -1,7 +1,7 @@
 {
   "name": "@home-assistant-matter-hub/frontend",
   "private": true,
-  "version": "0.0.0",
+  "version": "2026.1.0",
   "type": "module",
   "scripts": {
     "cleanup": "npx rimraf node_modules dist",
@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@codemirror/lang-json": "^6.0.2",
-    "@codemirror/lint": "^6.9.2",
+    "@codemirror/lint": "^6.9.3",
     "@home-assistant-matter-hub/common": "workspace:*",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
@@ -34,8 +34,8 @@
     "lodash": "^4.17.23",
     "qrcode.react": "^4.2.0",
     "remark-gfm": "^4.0.1",
-    "react": "^19.2.3",
-    "react-dom": "^19.2.3",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
     "react-markdown": "^10.1.0",
     "react-redux": "^9.2.0",
     "react-router": "^7.13.0",
@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "@types/lodash": "^4.17.23",
-    "@types/react": "^19.2.9",
+    "@types/react": "^19.2.10",
     "@types/react-dom": "^19.2.3",
     "@types/json-schema": "^7.0.15",
     "@vitejs/plugin-react-swc": "^4.2.2",

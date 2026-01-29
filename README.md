@@ -4,29 +4,6 @@
 
 ---
 
-> [!IMPORTANT]  
-> ⚠️ **Project Status: End of Maintenance**
->
-> As of **January 2026**, this project is no longer actively maintained.
->
-> I previously announced a search for a new maintainer, but unfortunately no one has stepped forward
-> to take over the project. Due to personal time constraints, I am no longer able to continue development or provide support.
->
-> **What this means:**
-> - ❌ No further feature development
-> - ❌ No bug fixes or updates
-> - ❌ No guaranteed support
->
-> The repository will remain available for reference and forking.
->
-> 💡 I would be very happy to see this project continued by the community.  
-> If you plan to fork it and continue development: **may the best fork prevail.**
->
-> Thank you to everyone who used, tested, and contributed to this project ❤️
-
-
----
-
 ## About
 
 This project simulates bridges to publish your entities from Home Assistant to any Matter-compatible controller like
@@ -35,9 +12,27 @@ of port forwarding etc.
 
 ---
 
+## Acknowledgments
+
+This project is a fork of the original [Home Assistant Matter Hub](https://github.com/t0bst4r/home-assistant-matter-hub)
+created by [t0bst4r](https://github.com/t0bst4r). A huge thank you to t0bst4r for the fantastic work and foundation
+that made this project possible!
+
+---
+
 ## Documentation
 
-Please see the [documentation](https://t0bst4r.github.io/home-assistant-matter-hub) for installation instructions,
+Please see the [documentation](./docs/README.md) for installation instructions,
 known issues, limitations and guides.
+
+---
+
+## Add-on Installation
+
+This repository can be added directly as a Home Assistant Add-on repository:
+
+1. **Settings** → **Add-ons** → **Add-on Store**
+2. Click **⋮** (menu top right) → **Repositories**
+3. Add this repository URL
 
 ---

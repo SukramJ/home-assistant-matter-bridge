@@ -55,6 +55,12 @@ export class ThermostatServerBase extends FeaturedBase {
           ? Thermostat.ControlSequenceOfOperation.CoolingOnly
           : Thermostat.ControlSequenceOfOperation.HeatingOnly;
 
+    // Set deadband to 0 before initialization to avoid constraint violations
+    // Matter requires: minHeatSetpointLimit <= minCoolSetpointLimit - minSetpointDeadBand
+    if (this.features.autoMode) {
+      this.state.minSetpointDeadBand = 0;
+    }
+
     await super.initialize();
 
     const homeAssistant = await this.agent.load(HomeAssistantEntityBehavior);
@@ -87,19 +93,39 @@ export class ThermostatServerBase extends FeaturedBase {
     const localTemperature = config
       .getCurrentTemperature(entity.state, this.agent)
       ?.celsius(true);
-    const targetHeatingTemperature =
+
+    // Get target temperatures and clamp them within limits
+    // Matter requires: minSetpointLimit <= setpoint <= maxSetpointLimit
+    const rawHeatingTemp =
       config
         .getTargetHeatingTemperature(entity.state, this.agent)
         ?.celsius(true) ?? this.state.occupiedHeatingSetpoint;
-    const targetCoolingTemperature =
+    const rawCoolingTemp =
       config
-        .getTargetHeatingTemperature(entity.state, this.agent)
+        .getTargetCoolingTemperature(entity.state, this.agent)
         ?.celsius(true) ?? this.state.occupiedCoolingSetpoint;
+
+    const targetHeatingTemperature = this.clampSetpoint(
+      rawHeatingTemp,
+      minSetpointLimit,
+      maxSetpointLimit,
+    );
+    const targetCoolingTemperature = this.clampSetpoint(
+      rawCoolingTemp,
+      minSetpointLimit,
+      maxSetpointLimit,
+    );
 
     const systemMode = this.getSystemMode(entity);
     const runningMode = config.getRunningMode(entity.state, this.agent);
 
+    // When autoMode is enabled, Matter requires: minHeatSetpointLimit <= minCoolSetpointLimit - minSetpointDeadBand
+    // We set deadband to 0, but must apply it first to avoid constraint violations during state update
+    const deadBand = this.features.autoMode ? 0 : undefined;
+
     applyPatchState(this.state, {
+      // Set deadband first to avoid constraint violations
+      ...(deadBand !== undefined ? { minSetpointDeadBand: deadBand } : {}),
       localTemperature: localTemperature,
       systemMode: systemMode,
       thermostatRunningState: this.getRunningState(systemMode, runningMode),
@@ -123,11 +149,28 @@ export class ThermostatServerBase extends FeaturedBase {
         : {}),
       ...(this.features.autoMode
         ? {
-            minSetpointDeadBand: 0,
             thermostatRunningMode: runningMode,
           }
         : {}),
     });
+  }
+
+  private clampSetpoint(
+    value: number | undefined,
+    min: number | undefined,
+    max: number | undefined,
+  ): number | undefined {
+    if (value === undefined) {
+      return undefined;
+    }
+    let clamped = value;
+    if (min !== undefined && clamped < min) {
+      clamped = min;
+    }
+    if (max !== undefined && clamped > max) {
+      clamped = max;
+    }
+    return clamped;
   }
 
   override setpointRaiseLower(request: Thermostat.SetpointRaiseLowerRequest) {

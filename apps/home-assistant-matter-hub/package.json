@@ -1,17 +1,22 @@
 {
   "name": "home-assistant-matter-hub",
   "description": "",
-  "version": "0.0.0",
+  "version": "2026.1.0",
   "private": false,
   "type": "module",
   "bin": {
     "home-assistant-matter-hub": "./dist/backend/cli.js"
   },
   "author": {
-    "email": "t0bst4r@outlook.com",
-    "name": "t0bst4r",
-    "url": "https://github.com/t0bst4r"
+    "name": "sukramj",
+    "url": "https://github.com/sukramj"
   },
+  "contributors": [
+    {
+      "name": "t0bst4r",
+      "url": "https://github.com/t0bst4r"
+    }
+  ],
   "keywords": [
     "home-assistant",
     "homeassistant",
@@ -31,10 +36,10 @@
     "smart-home"
   ],
   "bugs": {
-    "url": "https://github.com/t0bst4r/home-assistant-matter-hub/issues"
+    "url": "https://github.com/sukramj/home-assistant-matter-hub/issues"
   },
   "license": "Apache-2.0",
-  "repository": "github:t0bst4r/home-assistant-matter-hub",
+  "repository": "github:sukramj/home-assistant-matter-hub",
   "scripts": {
     "cleanup": "npx rimraf node_modules dist pack LICENSE README.md",
     "build": "node build.js",
