@@ -1,4 +1,4 @@
-import type { BridgeDataWithMetadata } from "@home-assistant-matter-hub/common";
+import type { BridgeDataWithMetadata } from "@home-assistant-matter-bridge/common";
 import QrCode from "@mui/icons-material/QrCode";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";

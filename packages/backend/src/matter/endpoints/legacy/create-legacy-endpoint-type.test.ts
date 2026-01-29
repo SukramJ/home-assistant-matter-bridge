@@ -18,7 +18,7 @@ import {
   type SensorDeviceAttributes,
   SensorDeviceClass,
   type VacuumDeviceAttributes,
-} from "@home-assistant-matter-hub/common";
+} from "@home-assistant-matter-bridge/common";
 import { Endpoint, type EndpointType } from "@matter/main";
 import { uniq } from "lodash-es";
 import { describe, expect, it } from "vitest";

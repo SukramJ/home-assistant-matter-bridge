@@ -1,4 +1,4 @@
-import type { MediaPlayerDeviceAttributes } from "@home-assistant-matter-hub/common";
+import type { MediaPlayerDeviceAttributes } from "@home-assistant-matter-bridge/common";
 import { LevelControlServer } from "../../../../behaviors/level-control-server.js";
 
 export const MediaPlayerLevelControlServer = LevelControlServer({

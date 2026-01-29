@@ -12,5 +12,5 @@ runs:
       id: dockerfiles
       shell: bash
       run: |
-        DOCKERFILES=$(ls -d apps/home-assistant-matter-hub/*.Dockerfile | jq -R . | jq -sc .)
+        DOCKERFILES=$(ls -d apps/home-assistant-matter-bridge/*.Dockerfile | jq -R . | jq -sc .)
         echo "dockerfiles=${DOCKERFILES}" >> "$GITHUB_OUTPUT"

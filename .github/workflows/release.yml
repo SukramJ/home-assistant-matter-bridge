@@ -64,6 +64,19 @@ jobs:
       - name: Test
         run: pnpm run test
 
+      - name: Test Coverage
+        run: pnpm run test:coverage
+
+      - name: Upload Coverage Reports
+        uses: actions/upload-artifact@v6
+        if: always()
+        with:
+          name: coverage-reports
+          path: |
+            packages/backend/coverage/
+            packages/frontend/coverage/
+            packages/common/coverage/
+
       - name: Update Version
         run: |
           pnpm version --workspaces --no-workspaces-update --no-git-tag-version --allow-same-version ${{ inputs.version }}
@@ -72,7 +85,7 @@ jobs:
         run: pnpm run build
 
       - name: Package
-        run: pnpm --filter home-assistant-matter-hub run bundle
+        run: pnpm --filter home-assistant-matter-bridge run bundle
 
       - name: Generate Changelog
         id: changelog
@@ -110,14 +123,14 @@ jobs:
             --title "v${{ inputs.version }}" \
             --notes-file CHANGELOG.md \
             ${{ inputs.channel == 'beta' && '--prerelease' || '' }} \
-            apps/home-assistant-matter-hub/package.tgz \
+            apps/home-assistant-matter-bridge/package.tgz \
             CHANGELOG.md
 
       - name: Upload Package Artifact
         uses: actions/upload-artifact@v6
         with:
           name: package.tgz
-          path: apps/home-assistant-matter-hub/package.tgz
+          path: apps/home-assistant-matter-bridge/package.tgz
 
       - name: Upload Documentation
         uses: actions/upload-pages-artifact@v4
@@ -161,7 +174,7 @@ jobs:
         uses: actions/download-artifact@v7
         with:
           name: package.tgz
-          path: apps/home-assistant-matter-hub/
+          path: apps/home-assistant-matter-bridge/
           merge-multiple: true
 
       - name: Build Docker
@@ -200,9 +213,9 @@ jobs:
       - name: Update Add-on Config
         run: |
           if [ "${{ inputs.channel }}" = "latest" ]; then
-            ADDON_DIR="hamh"
+            ADDON_DIR="hamb"
           else
-            ADDON_DIR="hamh-beta"
+            ADDON_DIR="hamb-beta"
           fi
 
           # Update version in config.yaml
@@ -221,9 +234,9 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
           if [ "${{ inputs.channel }}" = "latest" ]; then
-            ADDON_DIR="hamh"
+            ADDON_DIR="hamb"
           else
-            ADDON_DIR="hamh-beta"
+            ADDON_DIR="hamb-beta"
           fi
 
           git add "$ADDON_DIR/config.yaml" "$ADDON_DIR/CHANGELOG.md"

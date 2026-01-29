@@ -4,7 +4,7 @@ import type {
   BridgeData,
   CreateBridgeRequest,
   UpdateBridgeRequest,
-} from "@home-assistant-matter-hub/common";
+} from "@home-assistant-matter-bridge/common";
 import { Service } from "../../core/ioc/service.js";
 import type { BridgeStorage } from "../storage/bridge-storage.js";
 import type { Bridge } from "./bridge.js";

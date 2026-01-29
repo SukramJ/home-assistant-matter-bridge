@@ -18,8 +18,8 @@ export async function cli(argv: string[]): Promise<void> {
       : path.join(dirname, "../frontend");
   const cli = yargs(hideBin(argv));
   cli
-    .env("HAMH_")
-    .scriptName("home-assistant-matter-hub")
+    .env("HAMB_")
+    .scriptName("home-assistant-matter-bridge")
     .version()
     .strict()
     .recommendCommands()

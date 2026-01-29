@@ -1,7 +1,7 @@
 import {
   VacuumDeviceFeature,
   VacuumState,
-} from "@home-assistant-matter-hub/common";
+} from "@home-assistant-matter-bridge/common";
 import { RvcRunMode } from "@matter/main/clusters";
 import { testBit } from "../../../../../utils/test-bit.js";
 import { HomeAssistantEntityBehavior } from "../../../../behaviors/home-assistant-entity-behavior.js";

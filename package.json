@@ -1,5 +1,5 @@
 {
-  "name": "@home-assistant-matter-hub/root",
+  "name": "@home-assistant-matter-bridge/root",
   "version": "2026.1.0",
   "private": true,
   "type": "module",
@@ -14,14 +14,15 @@
     "lint:fix": "biome check --write",
     "pretest": "pnpm run build:minimum",
     "test": "pnpm -r run test",
+    "test:coverage": "pnpm -r run test:coverage",
     "build": "pnpm -r run build",
-    "build:minimum": "pnpm --filter @home-assistant-matter-hub/common run build",
+    "build:minimum": "pnpm --filter @home-assistant-matter-bridge/common run build",
     "build:app": "pnpm --filter './packages/*' run build",
     "preserve": "pnpm run build:minimum",
     "serve": "pnpm -r --parallel run serve",
     "start": "pnpm run serve",
     "preproduction": "pnpm run build:app",
-    "production": "pnpm --filter home-assistant-matter-hub run start",
+    "production": "pnpm --filter home-assistant-matter-bridge run start",
     "check-updates": "npx npm-check-updates --workspaces --root -u"
   },
   "workspaces": [

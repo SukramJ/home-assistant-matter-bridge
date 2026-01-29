@@ -1,7 +1,7 @@
 import {
   ColorConverter,
   type HomeAssistantEntityInformation,
-} from "@home-assistant-matter-hub/common";
+} from "@home-assistant-matter-bridge/common";
 import { ColorControlServer as Base } from "@matter/main/behaviors/color-control";
 import { ColorControl } from "@matter/main/clusters";
 import type { ColorInstance } from "color";

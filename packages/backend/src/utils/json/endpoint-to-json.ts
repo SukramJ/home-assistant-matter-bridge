@@ -1,4 +1,4 @@
-import type { EndpointData } from "@home-assistant-matter-hub/common";
+import type { EndpointData } from "@home-assistant-matter-bridge/common";
 import type { Endpoint } from "@matter/main";
 
 export function endpointToJson(

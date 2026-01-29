@@ -5,7 +5,7 @@ import type {
   BridgeStatus,
   HomeAssistantFilter,
   UpdateBridgeRequest,
-} from "@home-assistant-matter-hub/common";
+} from "@home-assistant-matter-bridge/common";
 import type { ServerNode } from "@matter/main/node";
 import { values } from "lodash-es";
 import { Service } from "../../core/ioc/service.js";

@@ -1,4 +1,4 @@
-import type { EndpointData } from "@home-assistant-matter-hub/common";
+import type { EndpointData } from "@home-assistant-matter-bridge/common";
 
 export async function fetchDevices(bridgeId: string) {
   const response = await fetch(`api/matter/bridges/${bridgeId}/devices`);

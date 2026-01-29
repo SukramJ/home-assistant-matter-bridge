@@ -1,4 +1,4 @@
-import type { HomeAssistantEntityInformation } from "@home-assistant-matter-hub/common";
+import type { HomeAssistantEntityInformation } from "@home-assistant-matter-bridge/common";
 import { MediaInputServer as Base } from "@matter/main/behaviors";
 import { MediaInput } from "@matter/main/clusters";
 import { applyPatchState } from "../../utils/apply-patch-state.js";

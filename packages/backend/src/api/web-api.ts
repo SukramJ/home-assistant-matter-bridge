@@ -56,7 +56,7 @@ export class WebApi extends Service {
         basicAuth({
           users: { [this.props.auth.username]: this.props.auth.password },
           challenge: true,
-          realm: "Home Assistant Matter Hub",
+          realm: "Home Assistant Matter Bridge",
         }),
       );
       this.log.info("Basic authentication enabled");

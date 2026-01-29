@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Home Assistant Matter Hub is a bridge that exposes Home Assistant entities to Matter-compatible controllers (Alexa, Apple Home, Google Home). It's a TypeScript monorepo with backend services, React frontend, and shared libraries.
+Home Assistant Matter Bridge is a bridge that exposes Home Assistant entities to Matter-compatible controllers (Alexa, Apple Home, Google Home). It's a TypeScript monorepo with backend services, React frontend, and shared libraries.
 
 **Note**: This project is in end-of-maintenance mode as of January 2026.
 
@@ -18,8 +18,8 @@ pnpm run build:minimum  # Build only common package (required before other build
 
 # Testing
 pnpm test               # Run all tests (auto-builds common first)
-pnpm --filter @home-assistant-matter-hub/backend test   # Backend tests only
-pnpm --filter @home-assistant-matter-hub/common test    # Common tests only
+pnpm --filter @home-assistant-matter-bridge/backend test   # Backend tests only
+pnpm --filter @home-assistant-matter-bridge/common test    # Common tests only
 
 # Linting
 pnpm lint               # Check code with Biome
@@ -36,7 +36,7 @@ pnpm run production     # Build and start production app
 - **packages/backend/** - Node.js server: Matter protocol, Home Assistant WebSocket integration, Express REST API
 - **packages/frontend/** - React admin dashboard with Redux and Material-UI
 - **packages/common/** - Shared TypeScript types, schemas, and utilities
-- **apps/home-assistant-matter-hub/** - Final bundled application
+- **apps/home-assistant-matter-bridge/** - Final bundled application
 
 ### Data Flow
 
@@ -69,15 +69,15 @@ Matter Server Node → Controllers (Alexa/Apple/Google)
 
 ### Storage
 
-File-based JSON storage with migration system (v1→v5). Default location: `~/.hamh-development`
+File-based JSON storage with migration system (v1→v5). Default location: `~/.hamb-development`
 
 ## Development Setup
 
 Environment variables (see `.env.sample`):
-- `HAMH_HOME_ASSISTANT_URL` - Home Assistant instance URL
-- `HAMH_HOME_ASSISTANT_ACCESS_TOKEN` - HA long-lived access token
-- `HAMH_STORAGE_LOCATION` - Config storage path
-- `HAMH_LOG_LEVEL` - Logging verbosity (debug/info/warn/error)
+- `HAMB_HOME_ASSISTANT_URL` - Home Assistant instance URL
+- `HAMB_HOME_ASSISTANT_ACCESS_TOKEN` - HA long-lived access token
+- `HAMB_STORAGE_LOCATION` - Config storage path
+- `HAMB_LOG_LEVEL` - Logging verbosity (debug/info/warn/error)
 
 Frontend dev server proxies `/api` requests to backend at `localhost:8482`.
 

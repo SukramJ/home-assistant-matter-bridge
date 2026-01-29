@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { capitalize } from "@mui/material/utils";
 import { Link } from "react-router";
-import SvgLogo from "../assets/hamh-logo.svg?react";
+import SvgLogo from "../assets/hamb-logo.svg?react";
 import { useAppInfo } from "../hooks/app-info.ts";
 import { navigation } from "../routes.tsx";
 

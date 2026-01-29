@@ -1,4 +1,4 @@
-import type { MediaPlayerDeviceAttributes } from "@home-assistant-matter-hub/common";
+import type { MediaPlayerDeviceAttributes } from "@home-assistant-matter-bridge/common";
 import { MediaInputServer } from "../../../../behaviors/media-input-server.js";
 
 export const MediaPlayerMediaInputServer = MediaInputServer({

@@ -1,7 +1,7 @@
 import {
   type MediaPlayerDeviceAttributes,
   MediaPlayerDeviceFeature,
-} from "@home-assistant-matter-hub/common";
+} from "@home-assistant-matter-bridge/common";
 import { SpeakerDevice } from "@matter/main/devices";
 import { testBit } from "../../../../utils/test-bit.js";
 import { BasicInformationServer } from "../../../behaviors/basic-information-server.js";

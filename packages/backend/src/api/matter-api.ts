@@ -3,7 +3,7 @@ import {
   createBridgeRequestSchema,
   type UpdateBridgeRequest,
   updateBridgeRequestSchema,
-} from "@home-assistant-matter-hub/common";
+} from "@home-assistant-matter-bridge/common";
 import { Ajv } from "ajv";
 import express from "express";
 import type { BridgeService } from "../services/bridges/bridge-service.js";

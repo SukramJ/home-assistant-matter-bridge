@@ -1,4 +1,4 @@
-import type { HomeAssistantEntityInformation } from "@home-assistant-matter-hub/common";
+import type { HomeAssistantEntityInformation } from "@home-assistant-matter-bridge/common";
 import { RvcRunModeServer as Base } from "@matter/main/behaviors";
 import { ModeBase } from "@matter/main/clusters/mode-base";
 import type { RvcRunMode } from "@matter/main/clusters/rvc-run-mode";

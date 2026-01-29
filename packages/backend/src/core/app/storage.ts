@@ -23,5 +23,5 @@ function resolveStorageLocation(storageLocation: string | undefined) {
   const homedir = os.homedir();
   return storageLocation
     ? path.resolve(storageLocation.replace(/^~\//, `${homedir}/`))
-    : path.join(homedir, ".home-assistant-matter-hub");
+    : path.join(homedir, ".home-assistant-matter-bridge");
 }

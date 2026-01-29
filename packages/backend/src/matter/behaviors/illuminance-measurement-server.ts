@@ -1,7 +1,7 @@
 import type {
   HomeAssistantEntityInformation,
   HomeAssistantEntityState,
-} from "@home-assistant-matter-hub/common";
+} from "@home-assistant-matter-bridge/common";
 import { IlluminanceMeasurementServer as Base } from "@matter/main/behaviors";
 import { applyPatchState } from "../../utils/apply-patch-state.js";
 import { HomeAssistantEntityBehavior } from "./home-assistant-entity-behavior.js";

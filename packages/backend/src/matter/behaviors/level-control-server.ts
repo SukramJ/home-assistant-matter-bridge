@@ -1,4 +1,4 @@
-import type { HomeAssistantEntityInformation } from "@home-assistant-matter-hub/common";
+import type { HomeAssistantEntityInformation } from "@home-assistant-matter-bridge/common";
 import { LevelControlServer as Base } from "@matter/main/behaviors";
 import type { LevelControl } from "@matter/main/clusters/level-control";
 import { applyPatchState } from "../../utils/apply-patch-state.js";
