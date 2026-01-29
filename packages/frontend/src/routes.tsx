@@ -4,6 +4,8 @@ import { BridgeDetailsPage } from "./pages/bridge-details/BridgeDetailsPage.tsx"
 import { BridgesPage } from "./pages/bridges/BridgesPage.tsx";
 import { CreateBridgePage } from "./pages/edit-bridge/CreateBridgePage.tsx";
 import { EditBridgePage } from "./pages/edit-bridge/EditBridgePage.tsx";
+import { Logs } from "./pages/Logs.tsx";
+import { SystemInfo } from "./pages/SystemInfo.tsx";
 
 const documentationUrl =
   "https://sukramj.github.io/home-assistant-matter-bridge";
@@ -12,6 +14,8 @@ export const navigation = {
   bridge: (bridgeId: string) => `/bridges/${bridgeId}`,
   createBridge: "/bridges/create",
   editBridge: (bridgeId: string) => `/bridges/${bridgeId}/edit`,
+  logs: "/logs",
+  systemInfo: "/system",
 
   githubRepository: "https://github.com/sukramj/home-assistant-matter-bridge/",
   documentation: documentationUrl,
@@ -34,6 +38,8 @@ export const routes: RouteObject[] = [
       { path: navigation.createBridge, element: <CreateBridgePage /> },
       { path: navigation.bridge(":bridgeId"), element: <BridgeDetailsPage /> },
       { path: navigation.editBridge(":bridgeId"), element: <EditBridgePage /> },
+      { path: navigation.logs, element: <Logs /> },
+      { path: navigation.systemInfo, element: <SystemInfo /> },
     ],
   },
 ];

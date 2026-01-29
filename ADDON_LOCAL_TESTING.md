@@ -119,8 +119,8 @@ Check the logs:
 ## Production Deployment
 
 For production, the Docker images will be published to:
-- **Stable**: `ghcr.io/sukramj/home-assistant-matter-bridge-addon:2026.1.0`
-- **Beta**: `ghcr.io/sukramj/home-assistant-matter-bridge-addon-beta:2026.1.0`
+- **Stable**: `ghcr.io/sukramj/home-assistant-matter-bridge-addon:2026.1.1`
+- **Beta**: `ghcr.io/sukramj/home-assistant-matter-bridge-addon-beta:2026.1.1`
 
 These are built and published automatically by the GitHub Actions release workflow.
 

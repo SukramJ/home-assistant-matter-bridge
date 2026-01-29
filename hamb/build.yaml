@@ -5,8 +5,8 @@ build_from:
   armv7: ghcr.io/hassio-addons/base:18.2.1
 args:
   NODE_VERSION: "22"
-  PACKAGE_VERSION: "2026.1.0"
+  PACKAGE_VERSION: "2026.1.1"
 labels:
-  io.hass.version: "2026.1.0"
+  io.hass.version: "2026.1.1"
   io.hass.type: "addon"
 squash: false

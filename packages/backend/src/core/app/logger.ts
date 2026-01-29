@@ -1,5 +1,6 @@
 import { LogFormat, Logger, LogLevel as MatterLogLevel } from "@matter/general";
 import type { Service } from "../ioc/service.js";
+import type { LogCaptureService } from "./log-capture.js";
 
 export enum CustomLogLevel {
   SILLY = -1,
@@ -71,5 +72,58 @@ export class BetterLogger extends Logger {
     if (this._level <= CustomLogLevel.SILLY) {
       this.debug(...["SILLY", ...values]);
     }
+  }
+
+  /**
+   * Capture log message for log buffer
+   */
+  private captureLog(level: number, message: string): void {
+    try {
+      // Use dynamic import to avoid circular dependency
+      const LogCapture = (
+        globalThis as unknown as { __logCapture?: LogCaptureService }
+      ).__logCapture;
+      if (LogCapture) {
+        LogCapture.capture(level, this.name, message);
+      }
+    } catch {
+      // Silently fail to avoid breaking logging
+    }
+  }
+
+  override debug(...values: unknown[]): void {
+    const message = values.join(" ");
+    this.captureLog(MatterLogLevel.DEBUG, message);
+    super.debug(...values);
+  }
+
+  override info(...values: unknown[]): void {
+    const message = values.join(" ");
+    this.captureLog(MatterLogLevel.INFO, message);
+    super.info(...values);
+  }
+
+  override warn(...values: unknown[]): void {
+    const message = values.join(" ");
+    this.captureLog(MatterLogLevel.WARN, message);
+    super.warn(...values);
+  }
+
+  override error(...values: unknown[]): void {
+    const message = values.join(" ");
+    this.captureLog(MatterLogLevel.ERROR, message);
+    super.error(...values);
+  }
+
+  override fatal(...values: unknown[]): void {
+    const message = values.join(" ");
+    this.captureLog(MatterLogLevel.FATAL, message);
+    super.fatal(...values);
+  }
+
+  override notice(...values: unknown[]): void {
+    const message = values.join(" ");
+    this.captureLog(MatterLogLevel.NOTICE, message);
+    super.notice(...values);
   }
 }
