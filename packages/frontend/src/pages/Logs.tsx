@@ -1,32 +1,30 @@
 import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  Checkbox,
-  FormControl,
-  FormControlLabel,
-  InputLabel,
-  MenuItem,
-  Paper,
-  Select,
-  Stack,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  TextField,
-  Typography,
-} from "@mui/material";
-import {
   Delete as DeleteIcon,
   Download as DownloadIcon,
   Refresh as RefreshIcon,
 } from "@mui/icons-material";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Checkbox from "@mui/material/Checkbox";
+import FormControl from "@mui/material/FormControl";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import Paper from "@mui/material/Paper";
+import Select from "@mui/material/Select";
+import Stack from "@mui/material/Stack";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 import { useEffect, useRef, useState } from "react";
-import { useLogs, type LogFilters } from "../hooks/useLogs.js";
+import { type LogFilters, useLogs } from "../hooks/useLogs.js";
 
 const LOG_LEVELS = [
   { value: 0, label: "DEBUG", color: "#9E9E9E" },
@@ -46,6 +44,7 @@ export function Logs() {
   const { logs, total, loading, error, refresh, clearLogs } = useLogs(filters);
 
   // Auto-scroll to bottom when logs change
+  // biome-ignore lint/correctness/useExhaustiveDependencies: logs needed to trigger scroll on new data
   useEffect(() => {
     if (autoScroll && tableEndRef.current) {
       tableEndRef.current.scrollIntoView({ behavior: "smooth" });
@@ -113,13 +112,17 @@ export function Logs() {
                 <FormControl sx={{ minWidth: 150 }}>
                   <InputLabel>Log Level</InputLabel>
                   <Select
-                    value={filters.level !== undefined ? String(filters.level) : ""}
+                    value={
+                      filters.level !== undefined ? String(filters.level) : ""
+                    }
                     label="Log Level"
                     onChange={(e) =>
                       setFilters({
                         ...filters,
                         level:
-                          e.target.value === "" ? undefined : Number(e.target.value),
+                          e.target.value === ""
+                            ? undefined
+                            : Number(e.target.value),
                       })
                     }
                   >
@@ -136,7 +139,10 @@ export function Logs() {
                   label="Facility"
                   value={filters.facility ?? ""}
                   onChange={(e) =>
-                    setFilters({ ...filters, facility: e.target.value || undefined })
+                    setFilters({
+                      ...filters,
+                      facility: e.target.value || undefined,
+                    })
                   }
                   sx={{ minWidth: 200 }}
                 />
@@ -145,7 +151,10 @@ export function Logs() {
                   label="Search Message"
                   value={filters.search ?? ""}
                   onChange={(e) =>
-                    setFilters({ ...filters, search: e.target.value || undefined })
+                    setFilters({
+                      ...filters,
+                      search: e.target.value || undefined,
+                    })
                   }
                   sx={{ minWidth: 250 }}
                 />
@@ -220,7 +229,9 @@ export function Logs() {
         {/* Error message */}
         {error && (
           <Paper sx={{ p: 2, bgcolor: "error.light" }}>
-            <Typography color="error.contrastText">Error: {error.message}</Typography>
+            <Typography color="error.contrastText">
+              Error: {error.message}
+            </Typography>
           </Paper>
         )}
 
@@ -239,20 +250,26 @@ export function Logs() {
               {logs.length === 0 && !loading && (
                 <TableRow>
                   <TableCell colSpan={4} align="center">
-                    <Typography variant="body2" color="text.secondary" sx={{ py: 4 }}>
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      sx={{ py: 4 }}
+                    >
                       No logs found
                     </Typography>
                   </TableCell>
                 </TableRow>
               )}
-              {logs.map((log, index) => (
+              {logs.map((log) => (
                 <TableRow
-                  key={index}
+                  key={`${log.timestamp}-${log.facility}-${log.level}`}
                   sx={{
                     "&:hover": { bgcolor: "action.hover" },
                   }}
                 >
-                  <TableCell sx={{ fontFamily: "monospace", fontSize: "0.85rem" }}>
+                  <TableCell
+                    sx={{ fontFamily: "monospace", fontSize: "0.85rem" }}
+                  >
                     {new Date(log.timestamp).toLocaleString()}
                   </TableCell>
                   <TableCell>
@@ -271,10 +288,14 @@ export function Logs() {
                       {getLevelLabel(log.level)}
                     </Box>
                   </TableCell>
-                  <TableCell sx={{ fontFamily: "monospace", fontSize: "0.85rem" }}>
+                  <TableCell
+                    sx={{ fontFamily: "monospace", fontSize: "0.85rem" }}
+                  >
                     {log.facility}
                   </TableCell>
-                  <TableCell sx={{ fontFamily: "monospace", fontSize: "0.85rem" }}>
+                  <TableCell
+                    sx={{ fontFamily: "monospace", fontSize: "0.85rem" }}
+                  >
                     {log.message}
                   </TableCell>
                 </TableRow>

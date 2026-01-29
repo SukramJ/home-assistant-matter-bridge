@@ -1,20 +1,20 @@
-import { type Environment, StorageService } from "@matter/main";
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { type Environment, StorageService } from "@matter/main";
 import { WebApi } from "../../api/web-api.js";
 import { WebSocketServerService } from "../../api/websocket-server.js";
 import { BackupService } from "../../services/backup/backup-service.js";
 import { RestoreService } from "../../services/backup/restore-service.js";
 import { BridgeFactory } from "../../services/bridges/bridge-factory.js";
 import { BridgeService } from "../../services/bridges/bridge-service.js";
-import { SystemInfoService } from "../../services/system/system-info-service.js";
 import { HomeAssistantActions } from "../../services/home-assistant/home-assistant-actions.js";
 import { HomeAssistantClient } from "../../services/home-assistant/home-assistant-client.js";
 import { HomeAssistantConfig } from "../../services/home-assistant/home-assistant-config.js";
 import { HomeAssistantRegistry } from "../../services/home-assistant/home-assistant-registry.js";
 import { AppStorage } from "../../services/storage/app-storage.js";
 import { BridgeStorage } from "../../services/storage/bridge-storage.js";
+import { SystemInfoService } from "../../services/system/system-info-service.js";
 import { LogCaptureService } from "../app/log-capture.js";
 import { LoggerService } from "../app/logger.js";
 import type { Options } from "../app/options.js";
@@ -60,7 +60,9 @@ export class AppEnvironment extends EnvironmentBase {
     const logCapture = new LogCaptureService();
     this.set(LogCaptureService, logCapture);
     // Make log capture available globally for logger hooks
-    (globalThis as unknown as { __logCapture?: LogCaptureService }).__logCapture = logCapture;
+    (
+      globalThis as unknown as { __logCapture?: LogCaptureService }
+    ).__logCapture = logCapture;
 
     this.set(AppStorage, new AppStorage(await this.load(StorageService)));
     this.set(BridgeStorage, new BridgeStorage(await this.load(AppStorage)));
@@ -97,11 +99,16 @@ export class AppEnvironment extends EnvironmentBase {
 
     // Initialize backup/restore services
     const storageService = await this.load(StorageService);
-    const storageLocation = storageService.location ?? this.options.storage.location ?? "";
+    const storageLocation =
+      storageService.location ?? this.options.storage.location ?? "";
 
     this.set(
       BackupService,
-      new BackupService(logger.get("BackupService"), storageLocation, APP_VERSION),
+      new BackupService(
+        logger.get("BackupService"),
+        storageLocation,
+        APP_VERSION,
+      ),
     );
     this.set(
       RestoreService,

@@ -1,22 +1,20 @@
-import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  Checkbox,
-  Chip,
-  FormControlLabel,
-  LinearProgress,
-  Paper,
-  Stack,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableRow,
-  Typography,
-} from "@mui/material";
 import { Refresh as RefreshIcon } from "@mui/icons-material";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Checkbox from "@mui/material/Checkbox";
+import Chip from "@mui/material/Chip";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import LinearProgress from "@mui/material/LinearProgress";
+import Paper from "@mui/material/Paper";
+import Stack from "@mui/material/Stack";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableRow from "@mui/material/TableRow";
+import Typography from "@mui/material/Typography";
 import { useState } from "react";
 import { useSystemInfo } from "../hooks/useSystemInfo.js";
 
@@ -125,7 +123,9 @@ export function SystemInfo() {
                     <Typography variant="body2" color="text.secondary">
                       Model
                     </Typography>
-                    <Typography variant="body1">{systemInfo.cpu.model}</Typography>
+                    <Typography variant="body1">
+                      {systemInfo.cpu.model}
+                    </Typography>
                   </Box>
                   <Box>
                     <Typography variant="body2" color="text.secondary">
@@ -136,7 +136,11 @@ export function SystemInfo() {
                     </Typography>
                   </Box>
                   <Box>
-                    <Typography variant="body2" color="text.secondary" gutterBottom>
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      gutterBottom
+                    >
                       Usage: {systemInfo.cpu.usage.toFixed(2)}%
                     </Typography>
                     <LinearProgress
@@ -219,7 +223,12 @@ export function SystemInfo() {
                     <Typography variant="body2" color="text.secondary">
                       Process Memory
                     </Typography>
-                    <Stack direction="row" spacing={1} flexWrap="wrap" sx={{ mt: 1 }}>
+                    <Stack
+                      direction="row"
+                      spacing={1}
+                      flexWrap="wrap"
+                      sx={{ mt: 1 }}
+                    >
                       <Chip
                         label={`RSS: ${formatBytes(systemInfo.memory.process.rss)}`}
                         size="small"
@@ -307,7 +316,8 @@ export function SystemInfo() {
                           </Typography>
                         </TableCell>
                         <TableCell>
-                          {systemInfo.platform.type} ({systemInfo.platform.platform})
+                          {systemInfo.platform.type} (
+                          {systemInfo.platform.platform})
                         </TableCell>
                       </TableRow>
                       <TableRow>
@@ -332,7 +342,9 @@ export function SystemInfo() {
                             Home Directory
                           </Typography>
                         </TableCell>
-                        <TableCell sx={{ fontFamily: "monospace", fontSize: "0.85rem" }}>
+                        <TableCell
+                          sx={{ fontFamily: "monospace", fontSize: "0.85rem" }}
+                        >
                           {systemInfo.platform.homedir}
                         </TableCell>
                       </TableRow>
@@ -402,9 +414,9 @@ export function SystemInfo() {
                         <Typography variant="body2" fontWeight="bold">
                           {name}
                         </Typography>
-                        {addrs.map((addr, idx) => (
+                        {addrs.map((addr) => (
                           <Typography
-                            key={idx}
+                            key={`${addr.family}-${addr.address}`}
                             variant="body2"
                             sx={{
                               fontFamily: "monospace",

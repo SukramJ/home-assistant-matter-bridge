@@ -1,17 +1,17 @@
+import {
+  Dashboard as DashboardIcon,
+  Info as InfoIcon,
+  Article as LogsIcon,
+} from "@mui/icons-material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Toolbar from "@mui/material/Toolbar";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import {
-  Dashboard as DashboardIcon,
-  Article as LogsIcon,
-  Info as InfoIcon,
-} from "@mui/icons-material";
-import { useNavigate, useLocation } from "react-router";
-import { AppLogo } from "./AppLogo.tsx";
+import { useLocation, useNavigate } from "react-router";
 import { navigation } from "../routes.tsx";
+import { AppLogo } from "./AppLogo.tsx";
 
 export const AppTopBar = () => {
   const isLargeScreen = useMediaQuery("(min-width:600px)");
@@ -49,7 +49,8 @@ export const AppTopBar = () => {
                 sx={{
                   borderBottom: location.pathname === item.path ? 2 : 0,
                   borderRadius: 0,
-                  fontWeight: location.pathname === item.path ? "bold" : "normal",
+                  fontWeight:
+                    location.pathname === item.path ? "bold" : "normal",
                 }}
               >
                 {isLargeScreen ? item.label : ""}

@@ -85,7 +85,10 @@ export class BackupService extends Service {
   /**
    * Save backup to a file
    */
-  async saveBackupToFile(backupData: string, outputPath: string): Promise<void> {
+  async saveBackupToFile(
+    backupData: string,
+    outputPath: string,
+  ): Promise<void> {
     fs.writeFileSync(outputPath, backupData, "utf-8");
     this.log.info(`Backup saved to ${outputPath}`);
   }

@@ -1,8 +1,8 @@
 import type { Server as HttpServer } from "node:http";
+import { type WebSocket, WebSocketServer } from "ws";
 import type { BetterLogger } from "../core/app/logger.js";
 import { Service } from "../core/ioc/service.js";
 import type { BridgeService } from "../services/bridges/bridge-service.js";
-import { WebSocketServer, type WebSocket } from "ws";
 
 export interface WebSocketMessage {
   type: string;
@@ -47,7 +47,9 @@ export class WebSocketServerService extends Service {
    */
   private handleConnection(ws: WebSocket): void {
     this.clients.add(ws);
-    this.log.debug(`WebSocket client connected. Total clients: ${this.clients.size}`);
+    this.log.debug(
+      `WebSocket client connected. Total clients: ${this.clients.size}`,
+    );
 
     // Send initial state
     this.sendMessage(ws, {
@@ -74,7 +76,9 @@ export class WebSocketServerService extends Service {
 
     ws.on("close", () => {
       this.clients.delete(ws);
-      this.log.debug(`WebSocket client disconnected. Total clients: ${this.clients.size}`);
+      this.log.debug(
+        `WebSocket client disconnected. Total clients: ${this.clients.size}`,
+      );
     });
 
     ws.on("error", (error) => {
@@ -159,7 +163,9 @@ export class WebSocketServerService extends Service {
   }
 
   override async dispose(): Promise<void> {
-    this.clients.forEach((client) => client.close());
+    for (const client of this.clients.values()) {
+      client.close();
+    }
     this.clients.clear();
     this.wss?.close();
   }

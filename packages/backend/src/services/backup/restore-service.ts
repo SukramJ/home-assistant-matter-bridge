@@ -93,9 +93,7 @@ export class RestoreService extends Service {
     }
 
     this.log.info("Restore completed successfully");
-    this.log.warn(
-      "Application restart required for changes to take effect",
-    );
+    this.log.warn("Application restart required for changes to take effect");
   }
 
   /**

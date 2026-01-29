@@ -1,15 +1,15 @@
+import { readFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 import {
-  BridgeStatus,
   type BridgeHealthInfo,
+  BridgeStatus,
   type DetailedHealthData,
   type HealthData,
   HealthStatus,
   type SystemInfo,
 } from "@home-assistant-matter-bridge/common";
 import express from "express";
-import { readFileSync } from "node:fs";
-import { fileURLToPath } from "node:url";
-import { dirname, join } from "node:path";
 import type { BridgeService } from "../services/bridges/bridge-service.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -84,7 +84,6 @@ function calculateOverallHealth(bridgeService: BridgeService): HealthStatus {
   }
 
   let healthyCount = 0;
-  let degradedCount = 0;
   let unhealthyCount = 0;
 
   for (const bridge of bridges) {
@@ -99,7 +98,7 @@ function calculateOverallHealth(bridgeService: BridgeService): HealthStatus {
 
     // Degraded: Bridge running but has failed devices
     if (failedDeviceCount > 0) {
-      degradedCount++;
+      // Count as degraded (not incrementing any counter, handled by "otherwise" logic)
       continue;
     }
 

@@ -1,14 +1,14 @@
-import * as os from "node:os";
 import * as fs from "node:fs";
+import * as os from "node:os";
 import { promisify } from "node:util";
 import type {
-  SystemMetrics,
   CpuInfo,
   MemoryInfo,
-  StorageInfo,
-  ProcessInfo,
-  PlatformInfo,
   NetworkInfo,
+  PlatformInfo,
+  ProcessInfo,
+  StorageInfo,
+  SystemMetrics,
 } from "@home-assistant-matter-bridge/common";
 import { Service } from "../../core/ioc/service.js";
 
@@ -62,7 +62,8 @@ export class SystemInfoService extends Service {
     const totalUsage = userUsage + systemUsage;
 
     // Convert to percentage (cpuUsage is in microseconds)
-    const usage = elapsedTime > 0 ? (totalUsage / (elapsedTime * 1000)) * 100 : 0;
+    const usage =
+      elapsedTime > 0 ? (totalUsage / (elapsedTime * 1000)) * 100 : 0;
 
     // Update for next calculation
     this.lastCpuUsage = currentCpuUsage;
@@ -158,7 +159,10 @@ export class SystemInfoService extends Service {
    */
   private getNetworkInfo(): NetworkInfo {
     const interfaces = os.networkInterfaces();
-    const formattedInterfaces: Record<string, NetworkInfo["interfaces"][string]> = {};
+    const formattedInterfaces: Record<
+      string,
+      NetworkInfo["interfaces"][string]
+    > = {};
 
     for (const [name, addrs] of Object.entries(interfaces)) {
       if (!addrs) continue;

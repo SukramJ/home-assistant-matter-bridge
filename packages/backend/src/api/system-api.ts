@@ -6,7 +6,9 @@ import type { SystemInfoService } from "../services/system/system-info-service.j
  *
  * GET /api/system/info - Get complete system information
  */
-export function systemApi(systemInfoService: SystemInfoService): express.Router {
+export function systemApi(
+  systemInfoService: SystemInfoService,
+): express.Router {
   const router = express.Router();
 
   /**

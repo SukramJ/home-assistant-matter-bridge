@@ -156,7 +156,10 @@ export class ThermostatServerBase extends FeaturedBase {
 
     // Update thermostatRunningMode with elevated permissions to avoid
     // Matter.js read-only errors during external writes (fixes #24)
-    if (this.features.autoMode && runningMode !== this.state.thermostatRunningMode) {
+    if (
+      this.features.autoMode &&
+      runningMode !== this.state.thermostatRunningMode
+    ) {
       this.agent.asLocalActor(() => {
         this.state.thermostatRunningMode = runningMode;
       });

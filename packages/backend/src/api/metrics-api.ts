@@ -1,6 +1,6 @@
 import { BridgeStatus } from "@home-assistant-matter-bridge/common";
 import express from "express";
-import { collectDefaultMetrics, Counter, Gauge, Registry } from "prom-client";
+import { collectDefaultMetrics, Gauge, Registry } from "prom-client";
 import type { BridgeService } from "../services/bridges/bridge-service.js";
 
 /**

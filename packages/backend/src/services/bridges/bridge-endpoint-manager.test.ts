@@ -1,29 +1,31 @@
-import type { FailedDevice } from "@home-assistant-matter-bridge/common";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { InvalidDeviceError } from "../../utils/errors/invalid-device-error.js";
+import type { HomeAssistantClient } from "../home-assistant/home-assistant-client.js";
 import { BridgeEndpointManager } from "./bridge-endpoint-manager.js";
 import type { BridgeRegistry } from "./bridge-registry.js";
-import type { HomeAssistantClient } from "../home-assistant/home-assistant-client.js";
 
 // Mock dependencies
-const createMockClient = () => ({
-  connection: {},
-} as unknown as HomeAssistantClient);
+const createMockClient = () =>
+  ({
+    connection: {},
+  }) as unknown as HomeAssistantClient;
 
-const createMockRegistry = (entityIds: string[] = []) => ({
-  refresh: vi.fn(),
-  entityIds,
-} as unknown as BridgeRegistry);
+const createMockRegistry = (entityIds: string[] = []) =>
+  ({
+    refresh: vi.fn(),
+    entityIds,
+  }) as unknown as BridgeRegistry;
 
-const createMockLogger = () => ({
-  debug: vi.fn(),
-  info: vi.fn(),
-  warn: vi.fn(),
-  error: vi.fn(),
-  notice: vi.fn(),
-  fatal: vi.fn(),
-  log: vi.fn(),
-} as unknown as ReturnType<typeof import("@matter/general").Logger.get>);
+const createMockLogger = () =>
+  ({
+    debug: vi.fn(),
+    info: vi.fn(),
+    warn: vi.fn(),
+    error: vi.fn(),
+    notice: vi.fn(),
+    fatal: vi.fn(),
+    log: vi.fn(),
+  }) as unknown as ReturnType<typeof import("@matter/general").Logger.get>;
 
 // Mock LegacyEndpoint
 vi.mock("../../matter/endpoints/legacy/legacy-endpoint.js", () => ({
@@ -47,11 +49,7 @@ describe("BridgeEndpointManager - Graceful Error Handling", () => {
   describe("Failed Device Tracking", () => {
     it("should track devices that fail with InvalidDeviceError", async () => {
       mockRegistry = createMockRegistry(["light.test"]);
-      manager = new BridgeEndpointManager(
-        mockClient,
-        mockRegistry,
-        mockLogger,
-      );
+      manager = new BridgeEndpointManager(mockClient, mockRegistry, mockLogger);
 
       const { LegacyEndpoint } = await import(
         "../../matter/endpoints/legacy/legacy-endpoint.js"
@@ -71,11 +69,7 @@ describe("BridgeEndpointManager - Graceful Error Handling", () => {
 
     it("should track devices that fail with general errors", async () => {
       mockRegistry = createMockRegistry(["light.test"]);
-      manager = new BridgeEndpointManager(
-        mockClient,
-        mockRegistry,
-        mockLogger,
-      );
+      manager = new BridgeEndpointManager(mockClient, mockRegistry, mockLogger);
 
       const { LegacyEndpoint } = await import(
         "../../matter/endpoints/legacy/legacy-endpoint.js"
@@ -94,17 +88,14 @@ describe("BridgeEndpointManager - Graceful Error Handling", () => {
 
     it("should clear failed devices on new refresh", async () => {
       mockRegistry = createMockRegistry(["light.test"]);
-      manager = new BridgeEndpointManager(
-        mockClient,
-        mockRegistry,
-        mockLogger,
-      );
+      manager = new BridgeEndpointManager(mockClient, mockRegistry, mockLogger);
 
       const { LegacyEndpoint } = await import(
         "../../matter/endpoints/legacy/legacy-endpoint.js"
       );
 
       // Mock root.add to succeed
+      // biome-ignore lint/suspicious/noExplicitAny: test mock
       vi.spyOn(manager.root, "add").mockResolvedValue({} as any);
 
       // First refresh with failure
@@ -115,6 +106,7 @@ describe("BridgeEndpointManager - Graceful Error Handling", () => {
       expect(manager.getFailedDevices()).toHaveLength(1);
 
       // Second refresh successful
+      // biome-ignore lint/suspicious/noExplicitAny: test mock
       vi.mocked(LegacyEndpoint.create).mockResolvedValueOnce({
         entityId: "light.test",
         delete: vi.fn(),
@@ -127,14 +119,10 @@ describe("BridgeEndpointManager - Graceful Error Handling", () => {
 
     it("should manually clear failed devices", () => {
       mockRegistry = createMockRegistry([]);
-      manager = new BridgeEndpointManager(
-        mockClient,
-        mockRegistry,
-        mockLogger,
-      );
+      manager = new BridgeEndpointManager(mockClient, mockRegistry, mockLogger);
 
       // Add failed device manually (for testing)
-      (manager as any).failedDevices = [
+      (manager as unknown as { failedDevices: unknown[] }).failedDevices = [
         {
           entityId: "test",
           error: "test error",
@@ -155,11 +143,7 @@ describe("BridgeEndpointManager - Graceful Error Handling", () => {
         "light.working1",
         "light.working2",
       ]);
-      manager = new BridgeEndpointManager(
-        mockClient,
-        mockRegistry,
-        mockLogger,
-      );
+      manager = new BridgeEndpointManager(mockClient, mockRegistry, mockLogger);
 
       const { LegacyEndpoint } = await import(
         "../../matter/endpoints/legacy/legacy-endpoint.js"
@@ -167,14 +151,16 @@ describe("BridgeEndpointManager - Graceful Error Handling", () => {
 
       // Mock root.add to succeed
       let addCount = 0;
+      // biome-ignore lint/suspicious/noExplicitAny: test mock
       vi.spyOn(manager.root, "add").mockImplementation(async () => {
         addCount++;
         return {} as any;
       });
 
       let callCount = 0;
+      // biome-ignore lint/suspicious/noExplicitAny: test mock
       vi.mocked(LegacyEndpoint.create).mockImplementation(
-        async (registry, entityId) => {
+        async (_registry, entityId) => {
           callCount++;
           if (entityId === "light.broken") {
             throw new InvalidDeviceError("Broken device");
@@ -201,11 +187,7 @@ describe("BridgeEndpointManager - Graceful Error Handling", () => {
 
     it("should log warning when devices fail", async () => {
       mockRegistry = createMockRegistry(["light.test"]);
-      manager = new BridgeEndpointManager(
-        mockClient,
-        mockRegistry,
-        mockLogger,
-      );
+      manager = new BridgeEndpointManager(mockClient, mockRegistry, mockLogger);
 
       const { LegacyEndpoint } = await import(
         "../../matter/endpoints/legacy/legacy-endpoint.js"
@@ -226,11 +208,7 @@ describe("BridgeEndpointManager - Graceful Error Handling", () => {
 
     it("should log success when all devices load", async () => {
       mockRegistry = createMockRegistry(["light.test1", "light.test2"]);
-      manager = new BridgeEndpointManager(
-        mockClient,
-        mockRegistry,
-        mockLogger,
-      );
+      manager = new BridgeEndpointManager(mockClient, mockRegistry, mockLogger);
 
       const { LegacyEndpoint } = await import(
         "../../matter/endpoints/legacy/legacy-endpoint.js"
@@ -238,6 +216,7 @@ describe("BridgeEndpointManager - Graceful Error Handling", () => {
 
       // Mock root.add to succeed and track count
       let addCount = 0;
+      // biome-ignore lint/suspicious/noExplicitAny: test mock
       vi.spyOn(manager.root, "add").mockImplementation(async () => {
         addCount++;
         return {} as any;
@@ -248,6 +227,7 @@ describe("BridgeEndpointManager - Graceful Error Handling", () => {
         configurable: true,
       });
 
+      // biome-ignore lint/suspicious/noExplicitAny: test mock
       vi.mocked(LegacyEndpoint.create).mockResolvedValue({
         entityId: "test",
         delete: vi.fn(),
@@ -264,11 +244,7 @@ describe("BridgeEndpointManager - Graceful Error Handling", () => {
   describe("Endpoint Add Failures", () => {
     it("should track failures when endpoint.add() fails", async () => {
       mockRegistry = createMockRegistry(["light.test"]);
-      manager = new BridgeEndpointManager(
-        mockClient,
-        mockRegistry,
-        mockLogger,
-      );
+      manager = new BridgeEndpointManager(mockClient, mockRegistry, mockLogger);
 
       const mockEndpoint = {
         entityId: "light.test",
@@ -278,6 +254,7 @@ describe("BridgeEndpointManager - Graceful Error Handling", () => {
       const { LegacyEndpoint } = await import(
         "../../matter/endpoints/legacy/legacy-endpoint.js"
       );
+      // biome-ignore lint/suspicious/noExplicitAny: test mock
       vi.mocked(LegacyEndpoint.create).mockResolvedValueOnce(
         mockEndpoint as any,
       );
@@ -299,11 +276,7 @@ describe("BridgeEndpointManager - Graceful Error Handling", () => {
   describe("Endpoint Delete Failures", () => {
     it("should handle endpoint delete failures gracefully", async () => {
       mockRegistry = createMockRegistry([]);
-      manager = new BridgeEndpointManager(
-        mockClient,
-        mockRegistry,
-        mockLogger,
-      );
+      manager = new BridgeEndpointManager(mockClient, mockRegistry, mockLogger);
 
       // Create a mock endpoint that will fail to delete
       const mockEndpoint = {
@@ -312,6 +285,7 @@ describe("BridgeEndpointManager - Graceful Error Handling", () => {
       };
 
       // Mock parts.map to return our mock endpoint
+      // biome-ignore lint/suspicious/noExplicitAny: test mock
       vi.spyOn(manager.root.parts, "map").mockReturnValueOnce([
         mockEndpoint,
       ] as any);
@@ -328,11 +302,7 @@ describe("BridgeEndpointManager - Graceful Error Handling", () => {
   describe("ReadOnly FailedDevices", () => {
     it("should return readonly array of failed devices", async () => {
       mockRegistry = createMockRegistry(["light.test"]);
-      manager = new BridgeEndpointManager(
-        mockClient,
-        mockRegistry,
-        mockLogger,
-      );
+      manager = new BridgeEndpointManager(mockClient, mockRegistry, mockLogger);
 
       const { LegacyEndpoint } = await import(
         "../../matter/endpoints/legacy/legacy-endpoint.js"

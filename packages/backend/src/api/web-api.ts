@@ -3,12 +3,12 @@ import express from "express";
 import basicAuth from "express-basic-auth";
 import AccessControl from "express-ip-access-control";
 import nocache from "nocache";
+import type { LogCaptureService } from "../core/app/log-capture.js";
 import type { BetterLogger, LoggerService } from "../core/app/logger.js";
 import { Service } from "../core/ioc/service.js";
-import type { BridgeService } from "../services/bridges/bridge-service.js";
-import type { LogCaptureService } from "../core/app/log-capture.js";
 import type { BackupService } from "../services/backup/backup-service.js";
 import type { RestoreService } from "../services/backup/restore-service.js";
+import type { BridgeService } from "../services/bridges/bridge-service.js";
 import type { SystemInfoService } from "../services/system/system-info-service.js";
 import { accessLogger } from "./access-log.js";
 import { backupApi } from "./backup-api.js";
@@ -18,8 +18,8 @@ import { matterApi } from "./matter-api.js";
 import { metricsApi } from "./metrics-api.js";
 import { supportIngress, supportProxyLocation } from "./proxy-support.js";
 import { systemApi } from "./system-api.js";
-import { WebSocketServerService } from "./websocket-server.js";
 import { webUi } from "./web-ui.js";
+import type { WebSocketServerService } from "./websocket-server.js";
 
 export interface WebApiProps {
   readonly port: number;

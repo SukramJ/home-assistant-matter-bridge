@@ -23,7 +23,10 @@ export function backupApi(
       const filename = `hamb-backup-${timestamp}.json`;
 
       res.setHeader("Content-Type", "application/json");
-      res.setHeader("Content-Disposition", `attachment; filename="${filename}"`);
+      res.setHeader(
+        "Content-Disposition",
+        `attachment; filename="${filename}"`,
+      );
       res.status(200).send(backupData);
     } catch (error) {
       res.status(500).json({
@@ -43,9 +46,8 @@ export function backupApi(
    */
   router.post("/restore", async (req, res) => {
     try {
-      const backupJson = typeof req.body === "string"
-        ? req.body
-        : JSON.stringify(req.body);
+      const backupJson =
+        typeof req.body === "string" ? req.body : JSON.stringify(req.body);
 
       const preserveExisting = req.query.preserveExisting === "true";
 
@@ -64,7 +66,8 @@ export function backupApi(
 
       res.status(200).json({
         success: true,
-        message: "Backup restored successfully. Please restart the application.",
+        message:
+          "Backup restored successfully. Please restart the application.",
       });
     } catch (error) {
       res.status(500).json({
@@ -82,9 +85,8 @@ export function backupApi(
    */
   router.post("/validate", async (req, res) => {
     try {
-      const backupJson = typeof req.body === "string"
-        ? req.body
-        : JSON.stringify(req.body);
+      const backupJson =
+        typeof req.body === "string" ? req.body : JSON.stringify(req.body);
 
       const validation = restoreService.validateBackup(backupJson);
 

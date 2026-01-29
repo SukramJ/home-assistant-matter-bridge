@@ -1,8 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import {
-  fetchSystemInfo,
-  type SystemMetrics,
-} from "../api/system.js";
+import { fetchSystemInfo, type SystemMetrics } from "../api/system.js";
 
 export type { SystemMetrics };
 

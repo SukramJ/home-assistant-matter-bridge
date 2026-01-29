@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import {
-  fetchLogs,
   clearLogs as apiClearLogs,
+  fetchLogs,
   type LogEntry,
   type LogFilters,
 } from "../api/logs.js";
