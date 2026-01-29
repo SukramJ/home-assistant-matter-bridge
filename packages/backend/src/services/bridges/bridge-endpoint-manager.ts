@@ -1,3 +1,4 @@
+import type { FailedDevice } from "@home-assistant-matter-bridge/common";
 import type { Logger } from "@matter/general";
 import type { Endpoint } from "@matter/main";
 import { Service } from "../../core/ioc/service.js";
@@ -14,6 +15,7 @@ export class BridgeEndpointManager extends Service {
   readonly root: Endpoint;
   private entityIds: string[] = [];
   private unsubscribe?: () => void;
+  private failedDevices: FailedDevice[] = [];
 
   constructor(
     private readonly client: HomeAssistantClient,
@@ -22,6 +24,14 @@ export class BridgeEndpointManager extends Service {
   ) {
     super("BridgeEndpointManager");
     this.root = new AggregatorEndpoint("aggregator");
+  }
+
+  getFailedDevices(): ReadonlyArray<FailedDevice> {
+    return [...this.failedDevices];
+  }
+
+  clearFailedDevices(): void {
+    this.failedDevices = [];
   }
 
   override async dispose(): Promise<void> {
@@ -53,10 +63,20 @@ export class BridgeEndpointManager extends Service {
     const endpoints = this.root.parts.map((p) => p as EntityEndpoint);
     this.entityIds = this.registry.entityIds;
 
+    // Clear failed devices list at start of refresh
+    this.clearFailedDevices();
+
     const existingEndpoints: EntityEndpoint[] = [];
     for (const endpoint of endpoints) {
       if (!this.entityIds.includes(endpoint.entityId)) {
-        await endpoint.delete();
+        try {
+          await endpoint.delete();
+        } catch (e) {
+          this.log.warn(
+            `Failed to delete endpoint ${endpoint.entityId}: ${e?.toString()}`,
+          );
+          // Continue with next endpoint
+        }
       } else {
         existingEndpoints.push(endpoint);
       }
@@ -72,19 +92,56 @@ export class BridgeEndpointManager extends Service {
             this.log.warn(
               `Invalid device detected. Entity: ${entityId} Reason: ${(e as Error).message}`,
             );
+            this.failedDevices.push({
+              entityId,
+              error: `Invalid device: ${(e as Error).message}`,
+              timestamp: Date.now(),
+            });
             continue;
           } else {
             this.log.error(
               `Failed to create device ${entityId}. Error: ${e?.toString()}`,
             );
-            throw e;
+            this.failedDevices.push({
+              entityId,
+              error: `Creation failed: ${e?.toString()}`,
+              timestamp: Date.now(),
+            });
+            // Continue with next device instead of throwing
+            continue;
           }
         }
 
         if (endpoint) {
-          await this.root.add(endpoint);
+          try {
+            await this.root.add(endpoint);
+            this.log.debug(`Successfully added endpoint for ${entityId}`);
+          } catch (e) {
+            this.log.error(
+              `Failed to add endpoint ${entityId} to aggregator: ${e?.toString()}`,
+            );
+            this.failedDevices.push({
+              entityId,
+              error: `Failed to add endpoint: ${e?.toString()}`,
+              timestamp: Date.now(),
+            });
+            // Continue with next device instead of throwing
+          }
         }
       }
+    }
+
+    // Log summary of refresh operation
+    const successCount = this.root.parts.size;
+    const failedCount = this.failedDevices.length;
+    if (failedCount > 0) {
+      this.log.warn(
+        `Device refresh completed: ${successCount} successful, ${failedCount} failed`,
+      );
+    } else {
+      this.log.info(
+        `Device refresh completed successfully: ${successCount} devices loaded`,
+      );
     }
 
     if (this.unsubscribe) {

@@ -153,6 +153,17 @@ export class ThermostatServerBase extends FeaturedBase {
           }
         : {}),
     });
+
+    // Update thermostatRunningMode with elevated permissions to avoid
+    // Matter.js read-only errors during external writes (fixes #24)
+    if (
+      this.features.autoMode &&
+      runningMode !== this.state.thermostatRunningMode
+    ) {
+      this.agent.asLocalActor(() => {
+        this.state.thermostatRunningMode = runningMode;
+      });
+    }
   }
 
   private clampSetpoint(
@@ -210,6 +221,29 @@ export class ThermostatServerBase extends FeaturedBase {
     if (!next) {
       return;
     }
+
+    // For single-temperature thermostats, only update HA when heating setpoint
+    // changes if we're in heating mode (or auto/heat_cool). This prevents
+    // conflicting updates when Apple Home enforces deadband by updating both
+    // setpoints simultaneously. (fixes #38)
+    const config = this.state.config;
+    const homeAssistant = this.agent.get(HomeAssistantEntityBehavior);
+    const supportsTemperatureRange = config.supportsTemperatureRange(
+      homeAssistant.entity.state,
+      this.agent,
+    );
+
+    if (!supportsTemperatureRange) {
+      const systemMode = this.state.systemMode;
+      const isHeatingMode =
+        systemMode === Thermostat.SystemMode.Heat ||
+        systemMode === Thermostat.SystemMode.EmergencyHeat ||
+        systemMode === Thermostat.SystemMode.Auto;
+      if (!isHeatingMode) {
+        return; // Let cooling setpoint handler manage this
+      }
+    }
+
     this.setTemperature(
       next,
       Temperature.celsius(this.state.occupiedCoolingSetpoint / 100)!,
@@ -229,6 +263,29 @@ export class ThermostatServerBase extends FeaturedBase {
     if (!next) {
       return;
     }
+
+    // For single-temperature thermostats, only update HA when cooling setpoint
+    // changes if we're in cooling mode (or auto/heat_cool). This prevents
+    // conflicting updates when Apple Home enforces deadband by updating both
+    // setpoints simultaneously. (fixes #38)
+    const config = this.state.config;
+    const homeAssistant = this.agent.get(HomeAssistantEntityBehavior);
+    const supportsTemperatureRange = config.supportsTemperatureRange(
+      homeAssistant.entity.state,
+      this.agent,
+    );
+
+    if (!supportsTemperatureRange) {
+      const systemMode = this.state.systemMode;
+      const isCoolingMode =
+        systemMode === Thermostat.SystemMode.Cool ||
+        systemMode === Thermostat.SystemMode.Precooling ||
+        systemMode === Thermostat.SystemMode.Auto;
+      if (!isCoolingMode) {
+        return; // Let heating setpoint handler manage this
+      }
+    }
+
     this.setTemperature(
       Temperature.celsius(this.state.occupiedHeatingSetpoint / 100)!,
       next,

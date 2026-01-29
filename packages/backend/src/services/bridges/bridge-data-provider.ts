@@ -3,6 +3,7 @@ import type {
   BridgeData,
   BridgeFeatureFlags,
   BridgeStatus,
+  FailedDevice,
   HomeAssistantFilter,
   UpdateBridgeRequest,
 } from "@home-assistant-matter-bridge/common";
@@ -65,6 +66,7 @@ export class BridgeDataProvider extends Service implements BridgeData {
     status: BridgeServerStatus,
     serverNode: ServerNode,
     deviceCount: number,
+    failedDevices: ReadonlyArray<FailedDevice> = [],
   ) {
     const commissioning = serverNode.state.commissioning;
     return {
@@ -95,6 +97,7 @@ export class BridgeDataProvider extends Service implements BridgeData {
           }
         : undefined,
       deviceCount,
+      failedDevices: failedDevices.length > 0 ? [...failedDevices] : undefined,
     };
   }
 }

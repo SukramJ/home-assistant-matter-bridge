@@ -29,6 +29,7 @@ export class Bridge {
       this.status,
       this.server,
       this.aggregator.parts.size,
+      this.endpointManager.getFailedDevices(),
     );
   }
 

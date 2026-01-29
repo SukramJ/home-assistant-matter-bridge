@@ -3,13 +3,23 @@ import express from "express";
 import basicAuth from "express-basic-auth";
 import AccessControl from "express-ip-access-control";
 import nocache from "nocache";
+import type { LogCaptureService } from "../core/app/log-capture.js";
 import type { BetterLogger, LoggerService } from "../core/app/logger.js";
 import { Service } from "../core/ioc/service.js";
+import type { BackupService } from "../services/backup/backup-service.js";
+import type { RestoreService } from "../services/backup/restore-service.js";
 import type { BridgeService } from "../services/bridges/bridge-service.js";
+import type { SystemInfoService } from "../services/system/system-info-service.js";
 import { accessLogger } from "./access-log.js";
+import { backupApi } from "./backup-api.js";
+import { healthApi } from "./health-api.js";
+import { logsApi } from "./logs-api.js";
 import { matterApi } from "./matter-api.js";
+import { metricsApi } from "./metrics-api.js";
 import { supportIngress, supportProxyLocation } from "./proxy-support.js";
+import { systemApi } from "./system-api.js";
 import { webUi } from "./web-ui.js";
+import type { WebSocketServerService } from "./websocket-server.js";
 
 export interface WebApiProps {
   readonly port: number;
@@ -31,6 +41,11 @@ export class WebApi extends Service {
   constructor(
     logger: LoggerService,
     private readonly bridgeService: BridgeService,
+    private readonly logCapture: LogCaptureService,
+    private readonly backupService: BackupService,
+    private readonly restoreService: RestoreService,
+    private readonly systemInfoService: SystemInfoService,
+    private readonly websocketServer: WebSocketServerService,
     private readonly props: WebApiProps,
   ) {
     super("WebApi");
@@ -43,7 +58,12 @@ export class WebApi extends Service {
     api
       .use(express.json())
       .use(nocache())
-      .use("/matter", matterApi(this.bridgeService));
+      .use("/backup", backupApi(this.backupService, this.restoreService))
+      .use("/health", healthApi(this.bridgeService))
+      .use("/logs", logsApi(this.logCapture))
+      .use("/matter", matterApi(this.bridgeService))
+      .use("/metrics", metricsApi(this.bridgeService))
+      .use("/system", systemApi(this.systemInfoService));
 
     const middlewares: express.Handler[] = [
       this.accessLogger,
@@ -102,6 +122,11 @@ export class WebApi extends Service {
         this.log.info(
           `HTTP server (API ${this.props.webUiDist ? "& Web App" : "only"}) listening on port ${this.props.port}`,
         );
+
+        // Attach WebSocket server
+        this.websocketServer.attach(server);
+        this.websocketServer.startKeepalive();
+
         resolve(server);
       });
     });

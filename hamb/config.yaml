@@ -1,5 +1,5 @@
 ---
-version: "2026.1.0"
+version: "2026.1.1"
 image: ghcr.io/sukramj/home-assistant-matter-bridge-addon
 slug: hamb
 name: Home-Assistant-Matter-Bridge
@@ -7,7 +7,7 @@ description: Publish your entities from Home Assistant to any Matter-compatible 
 url: https://github.com/sukramj/home-assistant-matter-bridge
 panel_icon: mdi:hub
 panel_title: Matter Bridge
-homeassistant: 2026.1.0
+homeassistant: 2026.1.1
 homeassistant_api: true
 host_network: true
 init: false

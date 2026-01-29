@@ -1,5 +1,5 @@
 ---
-version: "2026.1.0-beta.1"
+version: "2026.1.1-beta.1"
 image: ghcr.io/sukramj/home-assistant-matter-bridge-addon
 slug: hamb-beta
 name: Home-Assistant-Matter-Bridge (Beta)
@@ -7,7 +7,7 @@ description: Beta Releases of Home Assistant Matter Bridge
 url: https://github.com/sukramj/home-assistant-matter-bridge
 panel_icon: mdi:hub
 panel_title: Matter Bridge (Beta)
-homeassistant: 2026.1.0
+homeassistant: 2026.1.1
 homeassistant_api: true
 host_network: true
 init: false

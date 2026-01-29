@@ -1,0 +1,12 @@
+---
+build_from:
+  aarch64: ghcr.io/hassio-addons/base:18.2.1
+  amd64: ghcr.io/hassio-addons/base:18.2.1
+  armv7: ghcr.io/hassio-addons/base:18.2.1
+args:
+  NODE_VERSION: "22"
+  PACKAGE_VERSION: "2026.1.1"
+labels:
+  io.hass.version: "2026.1.1"
+  io.hass.type: "addon"
+squash: false
