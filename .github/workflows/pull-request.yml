@@ -1,0 +1,77 @@
+name: Pull Request
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: "Verify Code"
+    runs-on: ubuntu-latest
+    outputs:
+      node-version: ${{ steps.setup.outputs.node-version }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Setup Environment
+        uses: ./.github/actions/setup-node
+        id: setup
+
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: pnpm run lint
+      - name: Test
+        run: pnpm run test
+      - name: Build
+        run: pnpm run build
+
+      - name: Package Artifact
+        uses: actions/upload-artifact@v5
+        with:
+          name: package.tgz
+          path: apps/home-assistant-matter-hub/package.tgz
+
+  prepare-docker:
+    name: "Prepare Docker"
+    runs-on: ubuntu-latest
+    outputs:
+      dockerfiles: ${{ steps.dockerfiles.outputs.dockerfiles }}
+    steps:
+      - uses: actions/checkout@v6
+      - name: Find Dockerfiles
+        id: dockerfiles
+        uses: ./.github/actions/find-dockerfiles
+
+  docker:
+    name: "Build Docker"
+    runs-on: ubuntu-24.04-arm
+    needs: [prepare-docker, verify]
+    strategy:
+      matrix:
+        dockerfile: ${{ fromJSON(needs.prepare-docker.outputs.dockerfiles) }}
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup Docker
+        uses: ./.github/actions/setup-docker
+
+      - name: Package Artifact
+        uses: actions/download-artifact@v6
+        with:
+          name: package.tgz
+          path: apps/home-assistant-matter-hub/
+          merge-multiple: true
+
+      - name: Build Docker
+        uses: ./.github/actions/docker
+        with:
+          dockerfile: ${{ matrix.dockerfile }}
+          node-version: ${{ needs.verify.outputs.node-version }}
+          package-version: run-${{ github.run_number }}
+          channel: "channel-run-${{ github.run_number }}"
