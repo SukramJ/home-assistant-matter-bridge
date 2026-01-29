@@ -1,5 +1,5 @@
 {
-  "name": "@home-assistant-matter-hub/backend",
+  "name": "@home-assistant-matter-bridge/backend",
   "version": "2026.1.0",
   "private": true,
   "type": "module",
@@ -7,14 +7,15 @@
     "cleanup": "npx rimraf node_modules dist",
     "build": "tsc && node bundle.js",
     "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
     "serve": "tsx watch --env-file=../../.env --env-file=.env.development --clear-screen=false src/cli.ts start",
     "help": "tsx src/cli.ts start --help"
   },
   "dependencies": {
-    "@home-assistant-matter-hub/common": "workspace:*",
+    "@home-assistant-matter-bridge/common": "workspace:*",
+    "@matter/general": "0.16.7",
     "@matter/main": "0.16.7",
     "@matter/nodejs": "0.16.7",
-    "@matter/general": "0.16.7",
     "ajv": "8.17.1",
     "color": "5.0.3",
     "debounce": "3.0.0",
@@ -26,8 +27,8 @@
     "nocache": "4.0.0",
     "rxjs": "7.8.2",
     "strip-color": "0.1.0",
-    "yargs": "18.0.0",
-    "ws": "8.19.0"
+    "ws": "8.19.0",
+    "yargs": "18.0.0"
   },
   "devDependencies": {
     "@types/color": "^4.2.0",
@@ -35,7 +36,10 @@
     "@types/express": "^5.0.6",
     "@types/lodash-es": "^4.17.12",
     "@types/strip-color": "^0.1.2",
+    "@types/supertest": "^6.0.3",
+    "@types/ws": "^8.18.1",
     "@types/yargs": "^17.0.35",
-    "@types/ws": "^8.18.1"
+    "@vitest/coverage-v8": "^4.0.18",
+    "supertest": "^7.2.2"
   }
 }

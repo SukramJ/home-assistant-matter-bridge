@@ -1,7 +1,7 @@
 import type {
   HomeAssistantEntityInformation,
   HomeAssistantEntityState,
-} from "@home-assistant-matter-hub/common";
+} from "@home-assistant-matter-bridge/common";
 import { TemperatureMeasurementServer as Base } from "@matter/main/behaviors";
 import { applyPatchState } from "../../utils/apply-patch-state.js";
 import type { Temperature } from "../../utils/converters/temperature.js";

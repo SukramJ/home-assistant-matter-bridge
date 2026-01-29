@@ -2,7 +2,7 @@ import {
   type ClimateDeviceAttributes,
   ClimateDeviceFeature,
   ClimateHvacMode,
-} from "@home-assistant-matter-hub/common";
+} from "@home-assistant-matter-bridge/common";
 import type { ClusterBehavior, EndpointType } from "@matter/main";
 import type { Thermostat } from "@matter/main/clusters";
 import { ThermostatDevice } from "@matter/main/devices";

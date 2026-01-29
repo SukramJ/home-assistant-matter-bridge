@@ -24,11 +24,11 @@ When you are using an ingress-like configuration, where the sub-path gets remove
 For nginx this looks like:
 
 ```nginx
-location /hamh/ {
+location /hamb/ {
     # it is important to have a trailing slash,
-    # otherwise nginx will not remove the "hamh" prefix
+    # otherwise nginx will not remove the "hamb" prefix
     proxy_pass http://192.168.178.23:8482/;
-    proxy_set_header x-ingress-path hamh;
+    proxy_set_header x-ingress-path hamb;
 }
 ```
 
@@ -39,9 +39,9 @@ If you cannot (or don't want to) configure your proxy to remove the prefix, set 
 For nginx this looks like:
 
 ```nginx
-location /hamh/ {
+location /hamb/ {
     # the missing trailing slash will configure nginx to NOT remove the prefix
     proxy_pass http://192.168.178.23:8482;
-    proxy_set_header x-forwarded-prefix hamh;
+    proxy_set_header x-forwarded-prefix hamb;
 }
 ```

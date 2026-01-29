@@ -1,4 +1,4 @@
-import type { BridgeData } from "@home-assistant-matter-hub/common";
+import type { BridgeData } from "@home-assistant-matter-bridge/common";
 import type { Environment } from "@matter/main";
 import { type Endpoint, ServerNode } from "@matter/main/node";
 import { createBridgeServerConfig } from "../../utils/json/create-bridge-server-config.js";

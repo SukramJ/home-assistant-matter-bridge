@@ -1,4 +1,4 @@
-import type { BridgeDataWithMetadata } from "@home-assistant-matter-hub/common";
+import type { BridgeDataWithMetadata } from "@home-assistant-matter-bridge/common";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import Alert from "@mui/material/Alert";

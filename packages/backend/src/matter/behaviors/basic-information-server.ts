@@ -1,5 +1,5 @@
 import crypto from "node:crypto";
-import type { HomeAssistantEntityInformation } from "@home-assistant-matter-hub/common";
+import type { HomeAssistantEntityInformation } from "@home-assistant-matter-bridge/common";
 import { VendorId } from "@matter/main";
 import { BridgedDeviceBasicInformationServer as Base } from "@matter/main/behaviors";
 import { BridgeDataProvider } from "../../services/bridges/bridge-data-provider.js";

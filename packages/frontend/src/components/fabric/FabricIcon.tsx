@@ -1,4 +1,4 @@
-import type { BridgeFabric } from "@home-assistant-matter-hub/common";
+import type { BridgeFabric } from "@home-assistant-matter-bridge/common";
 import QuestionMark from "@mui/icons-material/QuestionMark";
 import Box from "@mui/material/Box";
 import Tooltip from "@mui/material/Tooltip";

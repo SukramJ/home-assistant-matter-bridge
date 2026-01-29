@@ -1,4 +1,4 @@
-import type { EndpointData } from "@home-assistant-matter-hub/common";
+import type { EndpointData } from "@home-assistant-matter-bridge/common";
 
 export interface EndpointNameProps {
   endpoint: EndpointData;

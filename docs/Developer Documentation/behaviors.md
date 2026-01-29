@@ -1,4 +1,4 @@
-# Behaviors in Home Assistant Matter Hub
+# Behaviors in Home Assistant Matter Bridge
 
 ## Overview
 Behaviors are modular components that implement Matter clusters and map Home Assistant entity state/actions to Matter endpoints. They are used to compose endpoints and define their functionality.

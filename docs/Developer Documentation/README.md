@@ -2,7 +2,7 @@
 
 ## Overview
 
-Home Assistant Matter Hub (HAMH) is an addon for Home Assistant that acts as a Matter bridge, exposing Home Assistant devices to Matter controllers (Alexa, Apple Home, Google Home) via local communication. No cloud or custom skills are required.
+Home Assistant Matter Bridge (HAMB) is an addon for Home Assistant that acts as a Matter bridge, exposing Home Assistant devices to Matter controllers (Alexa, Apple Home, Google Home) via local communication. No cloud or custom skills are required.
 
 This documentation is intended for developers taking over or contributing to the project. It covers architecture, technologies, and key concepts, especially those related to the Matter protocol and bridging logic.
 
@@ -55,7 +55,7 @@ This documentation is intended for developers taking over or contributing to the
 
 ### Matter Bridge
 
-A bridge is a Matter node that exposes multiple endpoints (devices) to controllers. In HAMH, each bridge is backed by a Matter server node and an aggregator endpoint.
+A bridge is a Matter node that exposes multiple endpoints (devices) to controllers. In HAMB, each bridge is backed by a Matter server node and an aggregator endpoint.
 
 - **BridgeServerNode**: Subclass of `ServerNode` from `@matter/main/node`. Configured with bridge metadata and endpoints.
 - **AggregatorEndpoint**: Root endpoint that groups all exposed devices.
@@ -136,10 +136,10 @@ Exposed via Express (`matterApi`):
 
 - [Matter Protocol Specification](https://csa-iot.org/all-solutions/matter/)
 - [Home Assistant Developer Docs](https://developers.home-assistant.io/)
-- [HAMH User Documentation](https://sukramj.github.io/home-assistant-matter-hub)
+- [HAMB User Documentation](https://sukramj.github.io/home-assistant-matter-bridge)
 
 ---
 
 ## Contact & Maintainer
 
-For questions or contributions, please open an issue or discussion on [GitHub](https://github.com/sukramj/home-assistant-matter-hub).
+For questions or contributions, please open an issue or discussion on [GitHub](https://github.com/sukramj/home-assistant-matter-bridge).

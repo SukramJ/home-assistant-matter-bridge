@@ -30,7 +30,7 @@ export function startOptionsBuilder(yargs: Argv): Argv<StartOptions> {
     .option("storage-location", {
       type: "string",
       description:
-        "Path to a directory where the application should store its data. Defaults to $HOME/.home-assistant-matter-hub",
+        "Path to a directory where the application should store its data. Defaults to $HOME/.home-assistant-matter-bridge",
     })
     .option("http-port", {
       alias: "web-port",

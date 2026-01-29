@@ -5,14 +5,15 @@ import { BridgesPage } from "./pages/bridges/BridgesPage.tsx";
 import { CreateBridgePage } from "./pages/edit-bridge/CreateBridgePage.tsx";
 import { EditBridgePage } from "./pages/edit-bridge/EditBridgePage.tsx";
 
-const documentationUrl = "https://t0bst4r.github.io/home-assistant-matter-hub";
+const documentationUrl =
+  "https://sukramj.github.io/home-assistant-matter-bridge";
 export const navigation = {
   bridges: "/bridges",
   bridge: (bridgeId: string) => `/bridges/${bridgeId}`,
   createBridge: "/bridges/create",
   editBridge: (bridgeId: string) => `/bridges/${bridgeId}/edit`,
 
-  githubRepository: "https://github.com/t0bst4r/home-assistant-matter-hub/",
+  githubRepository: "https://github.com/sukramj/home-assistant-matter-bridge/",
   documentation: documentationUrl,
   faq: {
     multiFabric: `${documentationUrl}/connect-multiple-fabrics`,

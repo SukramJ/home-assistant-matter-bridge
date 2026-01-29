@@ -4,7 +4,7 @@ import {
   ClimateHvacAction,
   ClimateHvacMode,
   type HomeAssistantEntityState,
-} from "@home-assistant-matter-hub/common";
+} from "@home-assistant-matter-bridge/common";
 import type { Agent } from "@matter/main";
 import { Thermostat } from "@matter/main/clusters";
 import { HomeAssistantConfig } from "../../../../../services/home-assistant/home-assistant-config.js";

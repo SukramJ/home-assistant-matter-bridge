@@ -1,4 +1,4 @@
-import type { BridgeFabric } from "@home-assistant-matter-hub/common";
+import type { BridgeFabric } from "@home-assistant-matter-bridge/common";
 import { FabricIcon } from "./FabricIcon.tsx";
 
 export interface FabricListProps {

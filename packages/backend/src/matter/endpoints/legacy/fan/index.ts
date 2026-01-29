@@ -1,7 +1,7 @@
 import {
   type FanDeviceAttributes,
   FanDeviceFeature,
-} from "@home-assistant-matter-hub/common";
+} from "@home-assistant-matter-bridge/common";
 import type { EndpointType } from "@matter/main";
 import type { FanControl } from "@matter/main/clusters";
 import { FanDevice as Device } from "@matter/main/devices";

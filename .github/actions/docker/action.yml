@@ -25,7 +25,7 @@ runs:
       id: meta
       shell: bash
       env:
-        DOCKER_IMAGE_BASENAME: ghcr.io/sukramj/home-assistant-matter-hub
+        DOCKER_IMAGE_BASENAME: ghcr.io/sukramj/home-assistant-matter-bridge
       run: |
         CONTEXT=$(dirname "${{inputs.dockerfile}}")
         DOCKER_TYPE=$(basename "${{inputs.dockerfile}}" .Dockerfile)

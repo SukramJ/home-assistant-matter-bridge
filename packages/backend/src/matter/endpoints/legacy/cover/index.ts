@@ -1,7 +1,7 @@
 import {
   type CoverDeviceAttributes,
   CoverSupportedFeatures,
-} from "@home-assistant-matter-hub/common";
+} from "@home-assistant-matter-bridge/common";
 import type { EndpointType } from "@matter/main";
 import type { WindowCovering } from "@matter/main/clusters";
 import { WindowCoveringDevice } from "@matter/main/devices";

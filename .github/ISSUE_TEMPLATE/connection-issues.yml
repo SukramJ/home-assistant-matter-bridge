@@ -10,7 +10,7 @@ body:
   - type: input
     attributes:
       label: Version
-      description: Which version of Home-Assistant-Matter-Hub are you using?
+      description: Which version of Home-Assistant-Matter-Bridge are you using?
     validations:
       required: true
   - type: input
@@ -57,7 +57,7 @@ body:
     attributes:
       label: "Documentation & Issues"
       options:
-        - label: I have reviewed the [documentation](https://sukramj.github.io/home-assistant-matter-hub/connectivity-issues) and the linked troubleshooting guides.
+        - label: I have reviewed the [documentation](https://sukramj.github.io/home-assistant-matter-bridge/connectivity-issues) and the linked troubleshooting guides.
           required: true
-        - label: I have searched the [issues](https://github.com/sukramj/home-assistant-matter-hub/issues) for a similar problem.
+        - label: I have searched the [issues](https://github.com/sukramj/home-assistant-matter-bridge/issues) for a similar problem.
           required: true

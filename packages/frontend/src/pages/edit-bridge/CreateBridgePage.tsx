@@ -1,4 +1,4 @@
-import type { BridgeConfig } from "@home-assistant-matter-hub/common";
+import type { BridgeConfig } from "@home-assistant-matter-bridge/common";
 import Alert from "@mui/material/Alert";
 import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";

@@ -1,4 +1,4 @@
-import type { EndpointData } from "@home-assistant-matter-hub/common";
+import type { EndpointData } from "@home-assistant-matter-bridge/common";
 import AcUnitIcon from "@mui/icons-material/AcUnit";
 import BlindsIcon from "@mui/icons-material/Blinds";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";

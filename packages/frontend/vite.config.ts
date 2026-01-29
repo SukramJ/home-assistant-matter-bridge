@@ -12,7 +12,7 @@ export default defineConfig({
     },
   },
   define: {
-    __APP_VERSION__: JSON.stringify(process.env.APP_VERSION || "0.0.0-dev"),
+    __APP_VERSION__: JSON.stringify(process.env.APP_VERSION || "2026.1.0"),
   },
   plugins: [react(), svgr(), markdown()],
 });

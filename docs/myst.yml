@@ -2,7 +2,7 @@
 version: 1
 project:
   id: d11d5cfb-20bb-476f-ae19-14c66a03d139
-  github: https://github.com/sukramj/home-assistant-matter-hub
+  github: https://github.com/sukramj/home-assistant-matter-bridge
   toc:
     - file: README.md
     - title: Getting Started
@@ -24,10 +24,10 @@ project:
         - file: "Developer Documentation/behaviors.md"
 site:
   template: book-theme
-  title: Home-Assistant-Matter-Hub
+  title: Home-Assistant-Matter-Bridge
   options:
-    favicon: assets/hamh-logo-small.png
-    logo: assets/hamh-logo-large.png
+    favicon: assets/hamb-logo-small.png
+    logo: assets/hamb-logo-large.png
   nav:
     - title: GitHub
-      url: https://github.com/sukramj/home-assistant-matter-hub
+      url: https://github.com/sukramj/home-assistant-matter-bridge

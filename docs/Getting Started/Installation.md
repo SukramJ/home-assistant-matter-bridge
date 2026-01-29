@@ -22,7 +22,7 @@ This application can be installed in different ways:
 
 Simply add the following GitHub Repository URL to your Home Assistant AddOn Store.
 
-> https://github.com/sukramj/home-assistant-matter-hub
+> https://github.com/sukramj/home-assistant-matter-bridge
 
 1. Open the UI of your Home Assistant instance
 2. Go to `Settings` -> `Add-Ons` -> `Add-On Store`
@@ -46,16 +46,16 @@ This repository builds a docker image for every release. You can simply run it b
 ```yaml
 services:
   matter-hub:
-    image: ghcr.io/sukramj/home-assistant-matter-hub:latest
+    image: ghcr.io/sukramj/home-assistant-matter-bridge:latest
     restart: unless-stopped
     network_mode: host
     environment: # more options can be found in the configuration section
-      - HAMH_HOME_ASSISTANT_URL=http://192.168.178.123:8123/
-      - HAMH_HOME_ASSISTANT_ACCESS_TOKEN=ey...ZI
-      - HAMH_LOG_LEVEL=info
-      - HAMH_HTTP_PORT=8482
+      - HAMB_HOME_ASSISTANT_URL=http://192.168.178.123:8123/
+      - HAMB_HOME_ASSISTANT_ACCESS_TOKEN=ey...ZI
+      - HAMB_LOG_LEVEL=info
+      - HAMB_HTTP_PORT=8482
     volumes:
-      - $PWD/home-assistant-matter-hub:/data
+      - $PWD/home-assistant-matter-bridge:/data
 ```
 
 Having that you can simply run `docker compose up -d` to start the container.
@@ -68,20 +68,20 @@ Alternatively, you can also run the container as follows:
 docker run -d \
   # more options can be found in the configuration section
   # required: the address of your home assistant instance
-  -e HAMH_HOME_ASSISTANT_URL="http://192.168.178.123:8123/" \
+  -e HAMB_HOME_ASSISTANT_URL="http://192.168.178.123:8123/" \
   # required: a long lived access token for your home assistant instance
-  -e HAMH_HOME_ASSISTANT_ACCESS_TOKEN="eyJ.....dlc" \
+  -e HAMB_HOME_ASSISTANT_ACCESS_TOKEN="eyJ.....dlc" \
   # optional: debug | info | warn | error
   # default: info
-  -e HAMH_LOG_LEVEL="info" \
+  -e HAMB_LOG_LEVEL="info" \
   # optional: the port to use for the web ui
   # default: 8482
-  -e HAMH_HTTP_PORT=8482 \
+  -e HAMB_HTTP_PORT=8482 \
   # recommended: persist the configuration and application data
-  -v $PWD/home-assistant-matter-hub:/data \
+  -v $PWD/home-assistant-matter-bridge:/data \
   # required due to restrictions in matter
   --network=host \
-  ghcr.io/sukramj/home-assistant-matter-hub:latest
+  ghcr.io/sukramj/home-assistant-matter-bridge:latest
 ```
 
 See 2.3 for more configuration options.
@@ -93,31 +93,31 @@ Now you can go ahead and follow the [bridge configuration guide](./Bridge%20Conf
 If you want to install this application by hand, you simply need to run
 
 ```bash
-npm install -g home-assistant-matter-hub
+npm install -g home-assistant-matter-bridge
 ```
 
 To start the application, run
 
 ```bash
-home-assistant-matter-hub start \
+home-assistant-matter-bridge start \
   # required: the address of your home assistant instance
-  # can be replaced with an environment variable: HAMH_HOME_ASSISTANT_URL
+  # can be replaced with an environment variable: HAMB_HOME_ASSISTANT_URL
   --home-assistant-url="http://192.168.178.123:8123/" \
   # required: a long lived access token for your home assistant instance
-  # can be replaced with an environment variable: HAMH_HOME_ASSISTANT_ACCESS_TOKEN
+  # can be replaced with an environment variable: HAMB_HOME_ASSISTANT_ACCESS_TOKEN
   --home-assistant-access-token="eyJ.....dlc" \
   # optional: debug | info | warn | error
   # default: info
-  # can be replaced with an environment variable: HAMH_LOG_LEVEL
+  # can be replaced with an environment variable: HAMB_LOG_LEVEL
   --log-level=info \
   # optional: the port to use for the web ui
   # default: 8482
-  # can be replaced with an environment variable: HAMH_WEB_PORT
+  # can be replaced with an environment variable: HAMB_WEB_PORT
   --http-port=8482
 ```
 
-The application will store its data in `$HOME/.home-assistant-matter-hub`. You can configure the storage path by
-using the `--storage-location=/path/to/storage` option or `HAMH_STORAGE_STORAGE` environment variable.
+The application will store its data in `$HOME/.home-assistant-matter-bridge`. You can configure the storage path by
+using the `--storage-location=/path/to/storage` option or `HAMB_STORAGE_STORAGE` environment variable.
 
 See 2.3 for more configuration options.
 
@@ -129,7 +129,7 @@ General app configuration is done using the command line interface or environmen
 are available:
 
 ```
-home-assistant-matter-hub start
+home-assistant-matter-bridge start
 
 start the application
 
@@ -152,7 +152,7 @@ Options:
   --home-assistant-access-token  A long-lived access token for your Home Assistant Instance                              [string] [required]
 ```
 
-Each of those configuration options can be configured via environment variables, too. Simply prefix them with `HAMH_`
-and write them in capslock with underscores (e.g. `HAMH_MDNS_NETWORK_INTERFACE`).
+Each of those configuration options can be configured via environment variables, too. Simply prefix them with `HAMB_`
+and write them in capslock with underscores (e.g. `HAMB_MDNS_NETWORK_INTERFACE`).
 
 **Those configuration options are not needed for the Home Assistant Addon Installation type.**

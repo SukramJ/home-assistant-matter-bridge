@@ -1,12 +1,12 @@
 ---
-version: "2026.1.0"
-image: ghcr.io/sukramj/home-assistant-matter-hub-addon
-slug: hamh
-name: Home-Assistant-Matter-Hub
-description: Publish your entities from Home Assistant to any Matter-compatible controller like Alexa, Apple Home or Google Home.
-url: https://github.com/sukramj/home-assistant-matter-hub
+version: "2026.1.0-beta.1"
+image: ghcr.io/sukramj/home-assistant-matter-bridge-addon
+slug: hamb-beta
+name: Home-Assistant-Matter-Bridge (Beta)
+description: Beta Releases of Home Assistant Matter Bridge
+url: https://github.com/sukramj/home-assistant-matter-bridge
 panel_icon: mdi:hub
-panel_title: Matter Hub
+panel_title: Matter Bridge (Beta)
 homeassistant: 2026.1.0
 homeassistant_api: true
 host_network: true

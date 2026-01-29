@@ -1,11 +1,11 @@
 {
-  "name": "home-assistant-matter-hub",
+  "name": "home-assistant-matter-bridge",
   "description": "",
   "version": "2026.1.0",
   "private": false,
   "type": "module",
   "bin": {
-    "home-assistant-matter-hub": "./dist/backend/cli.js"
+    "home-assistant-matter-bridge": "./dist/backend/cli.js"
   },
   "author": {
     "name": "sukramj",
@@ -36,10 +36,10 @@
     "smart-home"
   ],
   "bugs": {
-    "url": "https://github.com/sukramj/home-assistant-matter-hub/issues"
+    "url": "https://github.com/sukramj/home-assistant-matter-bridge/issues"
   },
   "license": "Apache-2.0",
-  "repository": "github:sukramj/home-assistant-matter-hub",
+  "repository": "github:sukramj/home-assistant-matter-bridge",
   "scripts": {
     "cleanup": "npx rimraf node_modules dist pack LICENSE README.md",
     "build": "node build.js",
@@ -68,9 +68,9 @@
     "ws": "8.19.0"
   },
   "devDependencies": {
-    "@home-assistant-matter-hub/backend": "workspace:*",
-    "@home-assistant-matter-hub/frontend": "workspace:*",
-    "@home-assistant-matter-hub/common": "workspace:*",
+    "@home-assistant-matter-bridge/backend": "workspace:*",
+    "@home-assistant-matter-bridge/frontend": "workspace:*",
+    "@home-assistant-matter-bridge/common": "workspace:*",
     "@types/lodash-es": "^4.17.12"
   },
   "nx": {

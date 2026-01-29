@@ -1,4 +1,4 @@
-import { ClusterId } from "@home-assistant-matter-hub/common";
+import { ClusterId } from "@home-assistant-matter-bridge/common";
 import type { Logger } from "@matter/general";
 import { StorageBackendJsonFile } from "@matter/nodejs";
 import { pickBy } from "lodash-es";

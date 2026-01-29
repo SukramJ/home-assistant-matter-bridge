@@ -1,4 +1,4 @@
-import type { BridgeData } from "@home-assistant-matter-hub/common";
+import type { BridgeData } from "@home-assistant-matter-bridge/common";
 import type { Environment, Logger } from "@matter/general";
 import { Bridge } from "../../services/bridges/bridge.js";
 import { BridgeDataProvider } from "../../services/bridges/bridge-data-provider.js";

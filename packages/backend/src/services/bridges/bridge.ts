@@ -1,7 +1,7 @@
 import {
   BridgeStatus,
   type UpdateBridgeRequest,
-} from "@home-assistant-matter-hub/common";
+} from "@home-assistant-matter-bridge/common";
 import type { Environment, Logger } from "@matter/general";
 import type { LoggerService } from "../../core/app/logger.js";
 import { BridgeServerNode } from "../../matter/endpoints/bridge-server-node.js";

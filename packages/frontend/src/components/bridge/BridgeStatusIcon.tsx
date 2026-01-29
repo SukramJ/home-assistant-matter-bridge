@@ -1,4 +1,4 @@
-import { BridgeStatus } from "@home-assistant-matter-hub/common";
+import { BridgeStatus } from "@home-assistant-matter-bridge/common";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import PauseCircleOutlineIcon from "@mui/icons-material/PauseCircleOutline";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";

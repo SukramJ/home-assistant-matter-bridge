@@ -1,7 +1,7 @@
 import {
   type SensorDeviceAttributes,
   SensorDeviceClass,
-} from "@home-assistant-matter-hub/common";
+} from "@home-assistant-matter-bridge/common";
 import type { EndpointType } from "@matter/main";
 import type { HomeAssistantEntityBehavior } from "../../../behaviors/home-assistant-entity-behavior.js";
 import { HumiditySensorType } from "./devices/humidity-sensor.js";

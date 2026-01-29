@@ -2,7 +2,7 @@ import {
   type CoverDeviceAttributes,
   CoverDeviceState,
   type HomeAssistantEntityState,
-} from "@home-assistant-matter-hub/common";
+} from "@home-assistant-matter-bridge/common";
 import type { Agent } from "@matter/main";
 import { WindowCovering } from "@matter/main/clusters";
 import { BridgeDataProvider } from "../../../../../services/bridges/bridge-data-provider.js";

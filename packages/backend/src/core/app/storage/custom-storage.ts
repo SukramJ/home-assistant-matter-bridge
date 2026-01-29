@@ -1,5 +1,5 @@
 import fs from "node:fs";
-import { ClusterId } from "@home-assistant-matter-hub/common";
+import { ClusterId } from "@home-assistant-matter-bridge/common";
 import type { Logger } from "@matter/general";
 import { StorageBackendDisk } from "@matter/nodejs";
 import { forEach } from "lodash-es";

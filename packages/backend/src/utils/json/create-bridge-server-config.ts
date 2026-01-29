@@ -1,5 +1,5 @@
 import crypto from "node:crypto";
-import type { BridgeData } from "@home-assistant-matter-hub/common";
+import type { BridgeData } from "@home-assistant-matter-bridge/common";
 import { AggregatorEndpoint } from "@matter/main/endpoints";
 import { type Node, ServerNode } from "@matter/main/node";
 import { VendorId } from "@matter/main/types";
