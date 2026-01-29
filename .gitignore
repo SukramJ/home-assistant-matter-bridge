@@ -13,11 +13,11 @@
 # Dependencies
 node_modules/
 
-# Release assets
-CHANGELOG.md
-CHANGELOG_FULL.md
-RELEASE_VERSION
-RELEASE_CHANNEL
+# Release assets (generated files only)
+# Note: Keep root CHANGELOG.md and add-on CHANGELOG.md files
+/CHANGELOG_FULL.md
+/RELEASE_VERSION
+/RELEASE_CHANNEL
 
 # Build Results and Caching
 dist/
