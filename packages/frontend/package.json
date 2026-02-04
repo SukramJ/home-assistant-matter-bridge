@@ -1,7 +1,7 @@
 {
   "name": "@home-assistant-matter-bridge/frontend",
   "private": true,
-  "version": "2026.1.1",
+  "version": "2026.2.0",
   "type": "module",
   "scripts": {
     "cleanup": "npx rimraf node_modules dist",

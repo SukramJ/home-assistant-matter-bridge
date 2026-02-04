@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Calendar Versioning](https://calver.org/) (YYYY.M.patch).
 
+## [2026.2.0] - 2026-02-04
+
+### Security
+
+- Override `@isaacs/brace-expansion` to `>=5.0.1` to fix critical vulnerability [GHSA-7h2j-956f-4vf2](https://github.com/advisories/GHSA-7h2j-956f-4vf2) (Uncontrolled Resource Consumption in `@isaacs/brace-expansion` <=5.0.0) via the dependency chain `rimraf > glob > minimatch > @isaacs/brace-expansion`
+
+---
+
 ## [2026.1.1] - 2026-01-29
 
 **Based on riddix Fork** - This release adds comprehensive monitoring, debugging, and system management capabilities inspired by the [riddix fork](https://github.com/riddix/home-assistant-matter-hub) analysis. Implements backend APIs and complete frontend UI for health monitoring, logging, system metrics, backup/restore, and Prometheus integration.
@@ -295,5 +303,6 @@ For users updating from previous versions:
 
 Previous version history unavailable. This project is a restart of the original home-assistant-matter-hub project.
 
+[2026.2.0]: https://github.com/SukramJ/home-assistant-matter-bridge/releases/tag/v2026.2.0
 [2026.1.1]: https://github.com/SukramJ/home-assistant-matter-bridge/releases/tag/v2026.1.1
 [2026.1.0]: https://github.com/SukramJ/home-assistant-matter-bridge/releases/tag/v2026.1.0
