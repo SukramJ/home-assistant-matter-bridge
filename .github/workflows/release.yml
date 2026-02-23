@@ -222,7 +222,7 @@ jobs:
           sed -i "s/^version: .*/version: \"${{ inputs.version }}\"/" "$ADDON_DIR/config.yaml"
 
           # Update CHANGELOG
-          cat > "$ADDON_DIR/CHANGELOG.md" << 'EOF'
+          cat > "$ADDON_DIR/CHANGELOG.md" << EOF
           ## [${{ inputs.version }}](https://github.com/${{ github.repository }}/releases/tag/v${{ inputs.version }}) ($(date +%Y-%m-%d))
 
           See [GitHub Release](https://github.com/${{ github.repository }}/releases/tag/v${{ inputs.version }}) for details.
