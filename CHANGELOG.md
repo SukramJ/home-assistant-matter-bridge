@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Calendar Versioning](https://calver.org/) (YYYY.M.patch).
 
+## [2026.2.1] - 2026-02-23
+
+### Security
+
+- Update `ajv` from 8.17.1 to 8.18.0 to fix ReDoS vulnerability [GHSA-2g4f-4pwh-qvx6](https://github.com/advisories/GHSA-2g4f-4pwh-qvx6) when using `$data` option
+- Override `qs` to `>=6.14.2` to fix arrayLimit bypass denial of service [GHSA-w7fw-mjwx-w883](https://github.com/advisories/GHSA-w7fw-mjwx-w883)
+- Override `minimatch` to `>=10.2.1` to fix ReDoS via repeated wildcards [GHSA-3ppc-4f35-3m26](https://github.com/advisories/GHSA-3ppc-4f35-3m26)
+- Override `markdown-it` to `>=14.1.1` to fix ReDoS vulnerability [GHSA-38c4-r59v-3vqw](https://github.com/advisories/GHSA-38c4-r59v-3vqw)
+
+---
+
 ## [2026.2.0] - 2026-02-04
 
 ### Security
