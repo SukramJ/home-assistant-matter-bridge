@@ -1,6 +1,6 @@
 {
   "name": "@home-assistant-matter-bridge/root",
-  "version": "2026.2.0",
+  "version": "2026.2.1",
   "private": true,
   "type": "module",
   "packageManager": "pnpm@10.30.1",

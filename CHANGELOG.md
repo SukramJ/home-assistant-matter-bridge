@@ -14,6 +14,15 @@ and this project adheres to [Calendar Versioning](https://calver.org/) (YYYY.M.p
 - Override `minimatch` to `>=10.2.1` to fix ReDoS via repeated wildcards [GHSA-3ppc-4f35-3m26](https://github.com/advisories/GHSA-3ppc-4f35-3m26)
 - Override `markdown-it` to `>=14.1.1` to fix ReDoS vulnerability [GHSA-38c4-r59v-3vqw](https://github.com/advisories/GHSA-38c4-r59v-3vqw)
 
+### Changed
+
+- Update `@matter/general`, `@matter/main`, `@matter/nodejs` from 0.16.8 to 0.16.10
+- Update `@rjsf/core`, `@rjsf/mui`, `@rjsf/utils`, `@rjsf/validator-ajv8` from 6.2.5 to 6.3.1
+- Update `@mui/icons-material`, `@mui/material` from 7.3.7 to 7.3.8
+- Update `@mui/x-tree-view` from 8.27.0 to 8.27.2
+- Update `@biomejs/biome` from 2.3.14 to 2.4.4
+- Update various other dependencies to latest versions
+
 ---
 
 ## [2026.2.0] - 2026-02-04
