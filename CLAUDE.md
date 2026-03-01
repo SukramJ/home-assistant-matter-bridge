@@ -6,8 +6,6 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Home Assistant Matter Bridge is a bridge that exposes Home Assistant entities to Matter-compatible controllers (Alexa, Apple Home, Google Home). It's a TypeScript monorepo with backend services, React frontend, and shared libraries.
 
-**Note**: This project is in end-of-maintenance mode as of January 2026.
-
 ## Common Commands
 
 ```bash

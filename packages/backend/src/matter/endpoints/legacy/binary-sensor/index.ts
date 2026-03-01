@@ -7,11 +7,15 @@ import type { HomeAssistantEntityBehavior } from "../../../behaviors/home-assist
 import { ContactSensorType } from "./contact-sensor.js";
 import { OccupancySensorType } from "./occupancy-sensor.js";
 import { OnOffSensorType } from "./on-off-sensor.js";
+import { SmokeCoAlarmType } from "./smoke-co-alarm.js";
+import { WaterFreezeDetectorType } from "./water-freeze-detector.js";
 import { WaterLeakDetectorType } from "./water-leak-detector.js";
 
 type CombinedType =
   | typeof ContactSensorType
   | typeof OccupancySensorType
+  | typeof SmokeCoAlarmType
+  | typeof WaterFreezeDetectorType
   | typeof WaterLeakDetectorType
   | typeof OnOffSensorType;
 
@@ -27,6 +31,11 @@ const deviceClasses: Partial<Record<BinarySensorDeviceClass, CombinedType>> = {
   [BinarySensorDeviceClass.Lock]: ContactSensorType,
 
   [BinarySensorDeviceClass.Moisture]: WaterLeakDetectorType,
+
+  [BinarySensorDeviceClass.Smoke]: SmokeCoAlarmType,
+
+  [BinarySensorDeviceClass.Cold]: WaterFreezeDetectorType,
+  [BinarySensorDeviceClass.Safety]: WaterFreezeDetectorType,
 };
 
 export function BinarySensorDevice(

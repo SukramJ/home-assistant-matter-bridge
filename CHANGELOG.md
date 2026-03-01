@@ -5,6 +5,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Calendar Versioning](https://calver.org/) (YYYY.M.patch).
 
+## [2026.3.0] - 2026-03-01
+
+### Added
+
+#### New Device Types
+- **Smoke/CO Alarm**: `binary_sensor` with `device_class: smoke` now maps to `SmokeCoAlarmDevice` instead of a generic sensor, enabling proper smoke alarm display in Apple Home, Google Home, and Alexa
+- **Water Valve**: New `valve` domain support using `WaterValveDevice` with open/close control (e.g., Homematic HmIP-WSM irrigation valve)
+- **Generic Switch / Event**: New `event` domain support using `GenericSwitchDevice` for wall buttons and remotes (e.g., Homematic HmIP-WRC6, HmIP-KRCA) with short press, long press, and double press detection
+- **Select / Mode Select**: New `select` and `input_select` domain support using `ModeSelectDevice` for option selection entities
+- **Water Freeze Detector**: `binary_sensor` with `device_class: cold` or `safety` now maps to `WaterFreezeDetectorDevice` for frost warnings
+
+#### New Sensor Types
+- **Pressure Sensor**: `sensor` with `device_class: pressure` now maps to `PressureMeasurementCluster` (e.g., Homematic HmIP-SWO-PR weather station)
+- **CO2 Sensor**: `sensor` with `device_class: carbon_dioxide` now maps to `CarbonDioxideConcentrationMeasurement` with `AirQualitySensorDevice` (e.g., Homematic HmIP-SCTH230)
+- **Electrical Power Sensor**: `sensor` with `device_class: power` now maps to `ElectricalPowerMeasurement` (W → mW conversion)
+- **Electrical Energy Sensor**: `sensor` with `device_class: energy` now maps to `ElectricalEnergyMeasurement` with cumulative energy tracking (kWh → mWh conversion)
+- **PM2.5 Sensor**: `sensor` with `device_class: pm25` now maps to `Pm25ConcentrationMeasurement` with `AirQualitySensorDevice`
+- **PM10 Sensor**: `sensor` with `device_class: pm10` now maps to `Pm10ConcentrationMeasurement` with `AirQualitySensorDevice`
+
+#### Battery Status (PowerSource Cluster)
+- Automatic `PowerSource` cluster for all device types when the entity has a `battery` or `battery_level` attribute
+- Battery percentage, charge level (OK/Warning/Critical), and charging status exposed to Matter controllers
+- Enables battery status display in Apple Home, Google Home, and Alexa for battery-powered devices (e.g., Homematic thermostats, window sensors, smoke detectors, door locks)
+
+---
+
 ## [2026.2.1] - 2026-02-23
 
 ### Security
@@ -323,6 +349,8 @@ For users updating from previous versions:
 
 Previous version history unavailable. This project is a restart of the original home-assistant-matter-hub project.
 
+[2026.3.0]: https://github.com/SukramJ/home-assistant-matter-bridge/releases/tag/v2026.3.0
+[2026.2.1]: https://github.com/SukramJ/home-assistant-matter-bridge/releases/tag/v2026.2.1
 [2026.2.0]: https://github.com/SukramJ/home-assistant-matter-bridge/releases/tag/v2026.2.0
 [2026.1.1]: https://github.com/SukramJ/home-assistant-matter-bridge/releases/tag/v2026.1.1
 [2026.1.0]: https://github.com/SukramJ/home-assistant-matter-bridge/releases/tag/v2026.1.0
