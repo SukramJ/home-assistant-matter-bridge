@@ -102,7 +102,9 @@ const testEntities: Record<
       ],
     }),
   ],
-  [HomeAssistantDomain.lock]: [createEntity("lock.l1", "locked")],
+  [HomeAssistantDomain.lock]: [
+    createEntity("lock.l1", "locked", { battery: 75 }),
+  ],
   [HomeAssistantDomain.sensor]: [
     createEntity<SensorDeviceAttributes>("sensor.s1", "on", {
       device_class: SensorDeviceClass.temperature,
@@ -113,10 +115,34 @@ const testEntities: Record<
     createEntity<SensorDeviceAttributes>("sensor.s3", "on", {
       device_class: SensorDeviceClass.illuminance,
     }),
+    createEntity<SensorDeviceAttributes>("sensor.s4", "1013", {
+      device_class: SensorDeviceClass.pressure,
+    }),
+    createEntity<SensorDeviceAttributes>("sensor.s5", "420", {
+      device_class: SensorDeviceClass.carbon_dioxide,
+    }),
+    createEntity<SensorDeviceAttributes>("sensor.s6", "150", {
+      device_class: SensorDeviceClass.power,
+    }),
+    createEntity<SensorDeviceAttributes>("sensor.s7", "42.5", {
+      device_class: SensorDeviceClass.energy,
+    }),
+    createEntity<SensorDeviceAttributes>("sensor.s8", "12", {
+      device_class: SensorDeviceClass.pm25,
+    }),
+    createEntity<SensorDeviceAttributes>("sensor.s9", "25", {
+      device_class: SensorDeviceClass.pm10,
+    }),
   ],
   [HomeAssistantDomain.switch]: [createEntity("switch.sw1", "on")],
   [HomeAssistantDomain.automation]: [
     createEntity("automation.automation1", "on"),
+  ],
+  [HomeAssistantDomain.event]: [
+    createEntity("event.ev1", "", {
+      event_type: "press",
+      device_class: "button",
+    }),
   ],
   [HomeAssistantDomain.script]: [createEntity("script.script1", "on")],
   [HomeAssistantDomain.scene]: [createEntity("scene.scene1", "on")],
@@ -124,10 +150,20 @@ const testEntities: Record<
     createEntity("input_boolean.input_boolean1", "on"),
   ],
   [HomeAssistantDomain.input_button]: [createEntity("input_button.ib1", "any")],
+  [HomeAssistantDomain.input_select]: [
+    createEntity("input_select.is1", "option1", {
+      options: ["option1", "option2", "option3"],
+    }),
+  ],
   [HomeAssistantDomain.button]: [createEntity("button.b1", "any")],
   [HomeAssistantDomain.media_player]: [
     createEntity("media_player.m1", "on", {
       supported_features: MediaPlayerDeviceFeature.SELECT_SOURCE,
+    }),
+  ],
+  [HomeAssistantDomain.select]: [
+    createEntity("select.sel1", "mode1", {
+      options: ["mode1", "mode2"],
     }),
   ],
   [HomeAssistantDomain.humidifier]: [
@@ -138,6 +174,7 @@ const testEntities: Record<
       current_humidity: 45,
     }),
   ],
+  [HomeAssistantDomain.valve]: [createEntity("valve.v1", "closed")],
 };
 
 describe("createLegacyEndpointType", () => {
