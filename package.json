@@ -38,7 +38,8 @@
       "mdast-util-to-hast": ">=13.2.1",
       "undici": ">=7.18.2",
       "@isaacs/brace-expansion": ">=5.0.1",
-      "glob>minimatch": ">=10.2.1",
+      "minimatch": ">=10.2.3",
+      "rollup": ">=4.59.0",
       "markdown-it": ">=14.1.1"
     }
   },
