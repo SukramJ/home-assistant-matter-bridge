@@ -117,17 +117,17 @@ export class WebApi extends Service {
     if (this.server) {
       return;
     }
-    this.server = await new Promise((resolve) => {
+    this.server = await new Promise<http.Server>((resolve) => {
       const server = this.app.listen(this.props.port, () => {
         this.log.info(
           `HTTP server (API ${this.props.webUiDist ? "& Web App" : "only"}) listening on port ${this.props.port}`,
         );
 
         // Attach WebSocket server
-        this.websocketServer.attach(server);
+        this.websocketServer.attach(server as http.Server);
         this.websocketServer.startKeepalive();
 
-        resolve(server);
+        resolve(server as http.Server);
       });
     });
   }
