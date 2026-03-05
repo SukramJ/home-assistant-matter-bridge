@@ -68,7 +68,7 @@ jobs:
         run: pnpm run test:coverage
 
       - name: Upload Coverage Reports
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         if: always()
         with:
           name: coverage-reports
@@ -127,7 +127,7 @@ jobs:
             CHANGELOG.md
 
       - name: Upload Package Artifact
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: package.tgz
           path: apps/home-assistant-matter-bridge/package.tgz
@@ -164,14 +164,14 @@ jobs:
         uses: ./.github/actions/setup-docker
 
       - name: Login to GitHub Container Registry
-        uses: docker/login-action@v3
+        uses: docker/login-action@v4
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Download Package Artifact
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: package.tgz
           path: apps/home-assistant-matter-bridge/
