@@ -85,3 +85,11 @@ Frontend dev server proxies `/api` requests to backend at `localhost:8482`.
 - **Module system**: ES Modules throughout
 - **Material-UI imports**: Use path imports (e.g., `@mui/material/Button`) for tree-shaking
 - **Tests**: Vitest with `.test.ts` files alongside source
+
+## Workflow Rules
+
+1. **Plan before coding** - Before writing any code, describe your approach and wait for approval.
+2. **Clarify ambiguity** - If requirements are ambiguous, ask clarifying questions before writing any code.
+3. **Suggest edge-case tests** - After finishing code, list edge cases and suggest test cases to cover them.
+4. **Bug fix = test first** - When fixing a bug, start by writing a test that reproduces it, then fix it until the test passes.
+5. **Learn from corrections** - Every time you are corrected, reflect on what went wrong and come up with a plan to avoid repeating the mistake.
