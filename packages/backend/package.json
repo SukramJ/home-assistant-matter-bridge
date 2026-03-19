@@ -32,7 +32,7 @@
     "yargs": "18.0.0"
   },
   "devDependencies": {
-    "@types/color": "^4.2.0",
+    "@types/color": "^4.2.1",
     "@types/debounce": "^1.2.4",
     "@types/express": "^5.0.6",
     "@types/lodash-es": "^4.17.12",
@@ -40,7 +40,7 @@
     "@types/supertest": "^7.2.0",
     "@types/ws": "^8.18.1",
     "@types/yargs": "^17.0.35",
-    "@vitest/coverage-v8": "^4.0.18",
+    "@vitest/coverage-v8": "^4.1.0",
     "supertest": "^7.2.2"
   }
 }
