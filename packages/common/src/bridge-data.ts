@@ -1,8 +1,10 @@
 import type { HomeAssistantFilter } from "./home-assistant-filter.js";
+import type { EntityOverride } from "./matter-device-type.js";
 
 interface AllBridgeFeatureFlags {
   readonly coverDoNotInvertPercentage: boolean;
   readonly includeHiddenEntities: boolean;
+  readonly autoComposeSensors: boolean;
 }
 
 export type BridgeFeatureFlags = Partial<AllBridgeFeatureFlags>;
@@ -13,6 +15,7 @@ export interface BridgeConfig {
   readonly filter: HomeAssistantFilter;
   readonly featureFlags?: BridgeFeatureFlags;
   readonly countryCode?: string;
+  readonly entityOverrides?: Record<string, EntityOverride>;
 }
 
 export interface CreateBridgeRequest extends BridgeConfig {}

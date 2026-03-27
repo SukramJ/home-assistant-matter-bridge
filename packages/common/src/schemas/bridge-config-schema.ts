@@ -1,5 +1,6 @@
 import type { JSONSchema7 } from "json-schema";
 import { HomeAssistantMatcherType } from "../home-assistant-filter.js";
+import { MatterDeviceType } from "../matter-device-type.js";
 
 const homeAssistantMatcherSchema: JSONSchema7 = {
   type: "object",
@@ -58,8 +59,37 @@ const featureFlagSchema: JSONSchema7 = {
       type: "boolean",
       default: false,
     },
+    autoComposeSensors: {
+      title: "Auto-Compose Sensors",
+      description:
+        "Automatically combine related sensors (temperature, humidity, pressure, illuminance) from the same device into a single Matter endpoint",
+      type: "boolean",
+      default: false,
+    },
   },
   additionalProperties: false,
+};
+
+const entityOverrideSchema: JSONSchema7 = {
+  title: "Entity Override",
+  type: "object",
+  properties: {
+    deviceType: {
+      title: "Device Type",
+      type: "string",
+      enum: Object.values(MatterDeviceType),
+    },
+  },
+  required: ["deviceType"],
+  additionalProperties: false,
+};
+
+const entityOverridesSchema: JSONSchema7 = {
+  title: "Entity Overrides",
+  description:
+    "Override the Matter device type for specific entities. Keys are entity IDs (e.g. 'switch.my_light').",
+  type: "object",
+  additionalProperties: entityOverrideSchema,
 };
 
 export const bridgeConfigSchema: JSONSchema7 = {
@@ -87,6 +117,7 @@ export const bridgeConfigSchema: JSONSchema7 = {
     },
     filter: homeAssistantFilterSchema,
     featureFlags: featureFlagSchema,
+    entityOverrides: entityOverridesSchema,
   },
   required: ["name", "port", "filter"],
   additionalProperties: false,

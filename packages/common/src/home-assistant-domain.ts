@@ -1,4 +1,5 @@
 export enum HomeAssistantDomain {
+  alarm_control_panel = "alarm_control_panel",
   automation = "automation",
   button = "button",
   binary_sensor = "binary_sensor",
@@ -13,6 +14,7 @@ export enum HomeAssistantDomain {
   light = "light",
   lock = "lock",
   media_player = "media_player",
+  remote = "remote",
   scene = "scene",
   script = "script",
   select = "select",
@@ -20,4 +22,5 @@ export enum HomeAssistantDomain {
   switch = "switch",
   vacuum = "vacuum",
   valve = "valve",
+  water_heater = "water_heater",
 }

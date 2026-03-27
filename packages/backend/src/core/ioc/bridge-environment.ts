@@ -45,6 +45,7 @@ export class BridgeEnvironment extends EnvironmentBase {
       new BridgeEndpointManager(
         await this.load(HomeAssistantClient),
         this.get(BridgeRegistry),
+        this.get(BridgeDataProvider),
         this.endpointManagerLogger,
       ),
     );

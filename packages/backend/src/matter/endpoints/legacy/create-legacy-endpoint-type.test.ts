@@ -175,6 +175,18 @@ const testEntities: Record<
     }),
   ],
   [HomeAssistantDomain.valve]: [createEntity("valve.v1", "closed")],
+  [HomeAssistantDomain.alarm_control_panel]: [
+    createEntity("alarm_control_panel.a1", "disarmed"),
+  ],
+  [HomeAssistantDomain.remote]: [createEntity("remote.r1", "on")],
+  [HomeAssistantDomain.water_heater]: [
+    createEntity("water_heater.wh1", "electric", {
+      min_temp: 30,
+      max_temp: 60,
+      current_temperature: 45,
+      temperature: 50,
+    }),
+  ],
 };
 
 describe("createLegacyEndpointType", () => {

@@ -3,6 +3,7 @@ import type {
   BridgeData,
   BridgeFeatureFlags,
   BridgeStatus,
+  EntityOverride,
   FailedDevice,
   HomeAssistantFilter,
   UpdateBridgeRequest,
@@ -48,6 +49,9 @@ export class BridgeDataProvider extends Service implements BridgeData {
   get countryCode(): string | undefined {
     return this.data.countryCode;
   }
+  get entityOverrides(): Record<string, EntityOverride> | undefined {
+    return this.data.entityOverrides;
+  }
 
   /************************************************
    * Functions
@@ -77,6 +81,7 @@ export class BridgeDataProvider extends Service implements BridgeData {
       featureFlags: this.featureFlags,
       basicInformation: this.basicInformation,
       countryCode: this.countryCode,
+      entityOverrides: this.entityOverrides,
       status: status.code,
       statusReason: status.reason,
       commissioning: commissioning

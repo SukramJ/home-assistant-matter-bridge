@@ -10,6 +10,7 @@ import type { HomeAssistantStates } from "../../../services/home-assistant/home-
 import { HomeAssistantEntityBehavior } from "../../behaviors/home-assistant-entity-behavior.js";
 import { EntityEndpoint } from "../../endpoints/entity-endpoint.js";
 import { createLegacyEndpointType } from "./create-legacy-endpoint-type.js";
+import { createOverrideEndpointType } from "./device-type-overrides.js";
 
 /**
  * @deprecated
@@ -28,7 +29,10 @@ export class LegacyEndpoint extends EntityEndpoint {
       registry: entity,
       deviceRegistry,
     };
-    const type = createLegacyEndpointType(payload);
+    const override = registry.entityOverride(entityId);
+    const type = override
+      ? createOverrideEndpointType(override.deviceType, { entity: payload })
+      : createLegacyEndpointType(payload);
     if (!type) {
       return;
     }
