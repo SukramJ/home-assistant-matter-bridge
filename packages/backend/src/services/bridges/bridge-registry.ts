@@ -1,7 +1,9 @@
 import type {
   BridgeFeatureFlags,
+  EntityOverride,
   HomeAssistantDeviceRegistry,
   HomeAssistantEntityRegistry,
+  HomeAssistantEntityState,
   HomeAssistantFilter,
 } from "@home-assistant-matter-bridge/common";
 import { keys, pickBy, values } from "lodash-es";
@@ -38,6 +40,9 @@ export class BridgeRegistry {
   initialState(entityId: string) {
     return this._states[entityId];
   }
+  entityOverride(entityId: string): EntityOverride | undefined {
+    return this.dataProvider.entityOverrides?.[entityId];
+  }
 
   constructor(
     private readonly registry: HomeAssistantRegistry,
@@ -49,6 +54,7 @@ export class BridgeRegistry {
   refresh() {
     this._entities = pickBy(this.registry.entities, (entity) => {
       const device = this.registry.devices[entity.device_id];
+      const state = this.registry.states[entity.entity_id];
       const isHidden = this.isHiddenOrDisabled(
         this.dataProvider.featureFlags ?? {},
         entity,
@@ -57,6 +63,7 @@ export class BridgeRegistry {
         this.dataProvider.filter,
         entity,
         device,
+        state,
       );
       return !isHidden && matchesFilter;
     });
@@ -85,16 +92,17 @@ export class BridgeRegistry {
     filter: HomeAssistantFilter,
     entity: HomeAssistantEntityRegistry,
     device: HomeAssistantDeviceRegistry,
+    state?: HomeAssistantEntityState,
   ) {
     if (
       filter.include.length > 0 &&
-      !testMatchers(filter.include, device, entity)
+      !testMatchers(filter.include, device, entity, state)
     ) {
       return false;
     }
     if (
       filter.exclude.length > 0 &&
-      testMatchers(filter.exclude, device, entity)
+      testMatchers(filter.exclude, device, entity, state)
     ) {
       return false;
     }

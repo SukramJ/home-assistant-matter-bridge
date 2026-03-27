@@ -1,6 +1,7 @@
 import {
   type HomeAssistantDeviceRegistry,
   type HomeAssistantEntityRegistry,
+  type HomeAssistantEntityState,
   HomeAssistantMatcherType,
 } from "@home-assistant-matter-bridge/common";
 import { describe, expect, it } from "vitest";
@@ -24,6 +25,20 @@ const registryWithArea = { ...registry, area_id: "area_id" };
 const deviceRegistry: HomeAssistantDeviceRegistry = {
   id: "device4711",
   area_id: "area_id",
+  name: "Living Room Light",
+  name_by_user: "My Custom Light",
+};
+
+const state: HomeAssistantEntityState = {
+  entity_id: "light.my_entity",
+  state: "on",
+  last_changed: "2024-01-01T00:00:00Z",
+  last_updated: "2024-01-01T00:00:00Z",
+  attributes: {
+    device_class: "temperature",
+    friendly_name: "My Entity",
+  },
+  context: { id: "ctx" },
 };
 
 describe("matchEntityFilter.testMatcher", () => {
@@ -217,6 +232,148 @@ describe("matchEntityFilter.testMatcher", () => {
         {
           type: HomeAssistantMatcherType.Pattern,
           value: "light.my_en*z*",
+        },
+        undefined,
+        registry,
+      ),
+    ).toBeFalsy();
+  });
+
+  it("should match the regex", () => {
+    expect(
+      testMatcher(
+        {
+          type: HomeAssistantMatcherType.Regex,
+          value: "^light\\.my_.*$",
+        },
+        undefined,
+        registry,
+      ),
+    ).toBeTruthy();
+  });
+  it("should not match the regex", () => {
+    expect(
+      testMatcher(
+        {
+          type: HomeAssistantMatcherType.Regex,
+          value: "^switch\\..*$",
+        },
+        undefined,
+        registry,
+      ),
+    ).toBeFalsy();
+  });
+  it("should handle invalid regex gracefully", () => {
+    expect(
+      testMatcher(
+        {
+          type: HomeAssistantMatcherType.Regex,
+          value: "[invalid",
+        },
+        undefined,
+        registry,
+      ),
+    ).toBeFalsy();
+  });
+
+  it("should match the device name (name_by_user)", () => {
+    expect(
+      testMatcher(
+        {
+          type: HomeAssistantMatcherType.DeviceName,
+          value: "Custom Light",
+        },
+        deviceRegistry,
+        registry,
+      ),
+    ).toBeTruthy();
+  });
+  it("should match the device name case-insensitively", () => {
+    expect(
+      testMatcher(
+        {
+          type: HomeAssistantMatcherType.DeviceName,
+          value: "custom light",
+        },
+        deviceRegistry,
+        registry,
+      ),
+    ).toBeTruthy();
+  });
+  it("should fallback to device name when no name_by_user", () => {
+    const deviceWithoutUserName: HomeAssistantDeviceRegistry = {
+      id: "device4711",
+      area_id: "area_id",
+      name: "Living Room Light",
+    };
+    expect(
+      testMatcher(
+        {
+          type: HomeAssistantMatcherType.DeviceName,
+          value: "Living Room",
+        },
+        deviceWithoutUserName,
+        registry,
+      ),
+    ).toBeTruthy();
+  });
+  it("should not match the device name", () => {
+    expect(
+      testMatcher(
+        {
+          type: HomeAssistantMatcherType.DeviceName,
+          value: "Kitchen",
+        },
+        deviceRegistry,
+        registry,
+      ),
+    ).toBeFalsy();
+  });
+  it("should not match device name when no device", () => {
+    expect(
+      testMatcher(
+        {
+          type: HomeAssistantMatcherType.DeviceName,
+          value: "anything",
+        },
+        undefined,
+        registry,
+      ),
+    ).toBeFalsy();
+  });
+
+  it("should match the device class", () => {
+    expect(
+      testMatcher(
+        {
+          type: HomeAssistantMatcherType.DeviceClass,
+          value: "temperature",
+        },
+        undefined,
+        registry,
+        state,
+      ),
+    ).toBeTruthy();
+  });
+  it("should not match the device class", () => {
+    expect(
+      testMatcher(
+        {
+          type: HomeAssistantMatcherType.DeviceClass,
+          value: "humidity",
+        },
+        undefined,
+        registry,
+        state,
+      ),
+    ).toBeFalsy();
+  });
+  it("should not match device class when no state", () => {
+    expect(
+      testMatcher(
+        {
+          type: HomeAssistantMatcherType.DeviceClass,
+          value: "temperature",
         },
         undefined,
         registry,

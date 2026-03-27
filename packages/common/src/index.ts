@@ -9,6 +9,7 @@ export * from "./home-assistant-entity-information.js";
 export * from "./home-assistant-entity-registry.js";
 export * from "./home-assistant-entity-state.js";
 export * from "./home-assistant-filter.js";
+export * from "./matter-device-type.js";
 export * from "./schemas/index.js";
 export * from "./system-info.js";
 export * from "./utils/index.js";

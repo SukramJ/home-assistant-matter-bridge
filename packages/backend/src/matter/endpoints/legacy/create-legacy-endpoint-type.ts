@@ -8,6 +8,7 @@ import {
   type PowerSourceConfig,
   PowerSourceServer,
 } from "../../behaviors/power-source-server.js";
+import { AlarmControlPanelDevice } from "./alarm-control-panel/index.js";
 import { AutomationDevice } from "./automation/index.js";
 import { BinarySensorDevice } from "./binary-sensor/index.js";
 import { ButtonDevice } from "./button/index.js";
@@ -20,6 +21,7 @@ import { InputButtonDevice } from "./input-button/index.js";
 import { LightDevice } from "./light/index.js";
 import { LockDevice } from "./lock/index.js";
 import { MediaPlayerDevice } from "./media-player/index.js";
+import { RemoteDevice } from "./remote/index.js";
 import { SceneDevice } from "./scene/index.js";
 import { ScriptDevice } from "./script/index.js";
 import { SelectDevice } from "./select/index.js";
@@ -27,6 +29,7 @@ import { SensorDevice } from "./sensor/index.js";
 import { SwitchDevice } from "./switch/index.js";
 import { VacuumDevice } from "./vacuum/index.js";
 import { ValveDevice } from "./valve/index.js";
+import { WaterHeaterDevice } from "./water-heater/index.js";
 
 /**
  * @deprecated
@@ -74,6 +77,7 @@ const deviceCtrs: Record<
   HomeAssistantDomain,
   (homeAssistant: HomeAssistantEntityBehavior.State) => EndpointType | undefined
 > = {
+  alarm_control_panel: AlarmControlPanelDevice,
   light: LightDevice,
   switch: SwitchDevice,
   lock: LockDevice,
@@ -88,6 +92,7 @@ const deviceCtrs: Record<
   input_select: SelectDevice,
   button: ButtonDevice,
   automation: AutomationDevice,
+  remote: RemoteDevice,
   script: ScriptDevice,
   scene: SceneDevice,
   select: SelectDevice,
@@ -95,4 +100,5 @@ const deviceCtrs: Record<
   humidifier: HumidifierDevice,
   vacuum: VacuumDevice,
   valve: ValveDevice,
+  water_heater: WaterHeaterDevice,
 };

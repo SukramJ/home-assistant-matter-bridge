@@ -1,10 +1,13 @@
 export enum HomeAssistantMatcherType {
   Pattern = "pattern",
+  Regex = "regex",
   Domain = "domain",
   Platform = "platform",
   Label = "label",
   Area = "area",
   EntityCategory = "entity_category",
+  DeviceName = "device_name",
+  DeviceClass = "device_class",
 }
 
 export interface HomeAssistantMatcher {

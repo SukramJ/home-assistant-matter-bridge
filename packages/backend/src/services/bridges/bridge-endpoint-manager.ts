@@ -3,12 +3,17 @@ import type { Logger } from "@matter/general";
 import type { Endpoint } from "@matter/main";
 import { Service } from "../../core/ioc/service.js";
 import { AggregatorEndpoint } from "../../matter/endpoints/aggregator-endpoint.js";
+import {
+  ComposedSensorEndpoint,
+  groupSensorsByDevice,
+} from "../../matter/endpoints/composed/composed-sensor-endpoint.js";
 import type { EntityEndpoint } from "../../matter/endpoints/entity-endpoint.js";
 import { LegacyEndpoint } from "../../matter/endpoints/legacy/legacy-endpoint.js";
 import { InvalidDeviceError } from "../../utils/errors/invalid-device-error.js";
 import { subscribeEntities } from "../home-assistant/api/subscribe-entities.js";
 import type { HomeAssistantClient } from "../home-assistant/home-assistant-client.js";
 import type { HomeAssistantStates } from "../home-assistant/home-assistant-registry.js";
+import type { BridgeDataProvider } from "./bridge-data-provider.js";
 import type { BridgeRegistry } from "./bridge-registry.js";
 
 export class BridgeEndpointManager extends Service {
@@ -20,6 +25,7 @@ export class BridgeEndpointManager extends Service {
   constructor(
     private readonly client: HomeAssistantClient,
     private readonly registry: BridgeRegistry,
+    private readonly dataProvider: BridgeDataProvider,
     private readonly log: Logger,
   ) {
     super("BridgeEndpointManager");
@@ -66,6 +72,18 @@ export class BridgeEndpointManager extends Service {
     // Clear failed devices list at start of refresh
     this.clearFailedDevices();
 
+    // Determine which entities will be composed (if feature enabled)
+    const composedEntityIds = new Set<string>();
+    const sensorGroups = this.dataProvider.featureFlags?.autoComposeSensors
+      ? groupSensorsByDevice(this.registry)
+      : new Map();
+
+    for (const group of sensorGroups.values()) {
+      for (const entityId of group.entities.keys()) {
+        composedEntityIds.add(entityId);
+      }
+    }
+
     const existingEndpoints: EntityEndpoint[] = [];
     for (const endpoint of endpoints) {
       if (!this.entityIds.includes(endpoint.entityId)) {
@@ -75,14 +93,54 @@ export class BridgeEndpointManager extends Service {
           this.log.warn(
             `Failed to delete endpoint ${endpoint.entityId}: ${e?.toString()}`,
           );
-          // Continue with next endpoint
         }
       } else {
         existingEndpoints.push(endpoint);
       }
     }
 
+    // Create composed sensor endpoints
+    for (const group of sensorGroups.values()) {
+      // Skip if any entity in the group already has an endpoint
+      const groupEntityIds = [...group.entities.keys()];
+      if (
+        groupEntityIds.some((id) =>
+          existingEndpoints.find((e) => e.entityId === id),
+        )
+      ) {
+        continue;
+      }
+
+      try {
+        const endpoint = ComposedSensorEndpoint.create(this.registry, group);
+        if (endpoint) {
+          await this.root.add(endpoint);
+          this.log.debug(
+            `Created composed sensor endpoint for device ${group.deviceId} with entities: ${groupEntityIds.join(", ")}`,
+          );
+          // Track all entity IDs for state subscription
+          for (const entityId of endpoint.allEntityIds) {
+            if (!this.entityIds.includes(entityId)) {
+              this.entityIds.push(entityId);
+            }
+          }
+        }
+      } catch (e) {
+        this.log.error(
+          `Failed to create composed sensor for device ${group.deviceId}: ${e?.toString()}`,
+        );
+        this.failedDevices.push({
+          entityId: groupEntityIds[0],
+          error: `Composed sensor creation failed: ${e?.toString()}`,
+          timestamp: Date.now(),
+        });
+      }
+    }
+
+    // Create individual endpoints for non-composed entities
     for (const entityId of this.entityIds) {
+      if (composedEntityIds.has(entityId)) continue;
+
       let endpoint = existingEndpoints.find((e) => e.entityId === entityId);
       if (!endpoint) {
         try {
@@ -107,7 +165,6 @@ export class BridgeEndpointManager extends Service {
               error: `Creation failed: ${e?.toString()}`,
               timestamp: Date.now(),
             });
-            // Continue with next device instead of throwing
             continue;
           }
         }
@@ -125,7 +182,6 @@ export class BridgeEndpointManager extends Service {
               error: `Failed to add endpoint: ${e?.toString()}`,
               timestamp: Date.now(),
             });
-            // Continue with next device instead of throwing
           }
         }
       }
