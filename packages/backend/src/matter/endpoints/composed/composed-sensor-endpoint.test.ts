@@ -249,9 +249,7 @@ describe("buildComposedDeviceType", () => {
   });
 
   it("should include pressure for atmospheric_pressure", () => {
-    const deviceClasses = new Set([
-      SensorDeviceClass.atmospheric_pressure,
-    ]);
+    const deviceClasses = new Set([SensorDeviceClass.atmospheric_pressure]);
     const device = buildComposedDeviceType(deviceClasses);
     expect(device).toBeDefined();
   });
