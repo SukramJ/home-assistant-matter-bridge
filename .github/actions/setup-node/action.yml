@@ -18,10 +18,6 @@ runs:
         node-version-file: .nvmrc
         cache: "pnpm"
         registry-url: 'https://registry.npmjs.org'
-    - name: Update NPM
-      shell: bash
-      run: npm install -g npm@latest
-
     - name: Cleanup Node Version String
       id: cleanup
       shell: bash

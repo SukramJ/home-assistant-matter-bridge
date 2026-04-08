@@ -1,7 +1,7 @@
 {
   "name": "home-assistant-matter-bridge",
   "description": "",
-  "version": "2026.3.0",
+  "version": "2026.4.0",
   "private": false,
   "type": "module",
   "bin": {
