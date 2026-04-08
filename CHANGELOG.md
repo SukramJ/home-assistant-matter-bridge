@@ -360,6 +360,7 @@ For users updating from previous versions:
 
 Previous version history unavailable. This project is a restart of the original home-assistant-matter-hub project.
 
+[2026.3.1]: https://github.com/SukramJ/home-assistant-matter-bridge/releases/tag/v2026.3.1
 [2026.3.0]: https://github.com/SukramJ/home-assistant-matter-bridge/releases/tag/v2026.3.0
 [2026.2.1]: https://github.com/SukramJ/home-assistant-matter-bridge/releases/tag/v2026.2.1
 [2026.2.0]: https://github.com/SukramJ/home-assistant-matter-bridge/releases/tag/v2026.2.0
