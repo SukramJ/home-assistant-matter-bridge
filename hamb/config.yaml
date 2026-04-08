@@ -1,5 +1,5 @@
 ---
-version: "2026.3.0"
+version: "2026.4.0"
 image: ghcr.io/sukramj/home-assistant-matter-bridge-addon
 slug: hamb
 name: Home-Assistant-Matter-Bridge
