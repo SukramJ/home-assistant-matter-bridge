@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Calendar Versioning](https://calver.org/) (YYYY.M.patch).
 
+## [2026.3.1] - 2026-04-08
+
+### Security
+
+- Update `vite` from 8.0.3 to 8.0.5 to fix `server.fs.deny` bypass via queries [GHSA-7gwx-vgwp-r8v5](https://github.com/advisories/GHSA-7gwx-vgwp-r8v5), arbitrary file read via WebSocket [GHSA-q5c7-mhwv-q45c](https://github.com/advisories/GHSA-q5c7-mhwv-q45c), and path traversal in optimized deps `.map` handling [GHSA-hcj4-xf6m-2jvm](https://github.com/advisories/GHSA-hcj4-xf6m-2jvm)
+- Override `path-to-regexp` to `>=8.4.0` to fix ReDoS via multiple wildcards [GHSA-rhx6-c78j-4q9w](https://github.com/advisories/GHSA-rhx6-c78j-4q9w) and DoS via sequential optional groups [GHSA-jchm-fm4c-z2cp](https://github.com/advisories/GHSA-jchm-fm4c-z2cp)
+- Override `brace-expansion` to `>=5.0.5` to fix process hang and memory exhaustion via zero-step sequences [GHSA-3ppc-4f35-3m26](https://github.com/advisories/GHSA-3ppc-4f35-3m26)
+- Override `yaml` to `>=2.8.3` to fix stack overflow via deeply nested YAML collections [GHSA-2jcg-qqmg-46wm](https://github.com/advisories/GHSA-2jcg-qqmg-46wm)
+
+---
+
 ## [2026.3.0] - 2026-03-01
 
 ### Added
