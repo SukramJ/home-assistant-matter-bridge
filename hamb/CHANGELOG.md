@@ -1,4 +1,4 @@
-## [2026.3.1](https://github.com/SukramJ/home-assistant-matter-bridge/releases/tag/v2026.3.1) (2026-03-27)
+## [2026.4.0](https://github.com/SukramJ/home-assistant-matter-bridge/releases/tag/v2026.4.0) (2026-03-27)
 
 ### Features
 

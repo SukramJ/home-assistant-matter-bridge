@@ -5,7 +5,36 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Calendar Versioning](https://calver.org/) (YYYY.M.patch).
 
-## [2026.3.1] - 2026-04-08
+## [2026.4.0] - 2026-04-08
+
+### Added
+
+#### Auto-Composed Sensor Devices
+- **Automatic sensor composition**: Related sensors (temperature, humidity, pressure, illuminance) from the same physical device can now be combined into a single Matter endpoint, reducing clutter in Matter controllers
+- New feature flag `autoComposeSensors` (default: off) to enable auto-composition per bridge
+- Sensors are grouped by Home Assistant device ID; groups with 2+ compatible sensors are composed automatically
+- Primary entity selected by priority: temperature > humidity > pressure > illuminance
+
+#### New Device Types
+- **Alarm Control Panel**: `alarm_control_panel` domain support using `ModeSelectDevice` with states (disarmed, armed_home, armed_away, armed_night, armed_vacation, armed_custom_bypass, triggered)
+- **Remote**: `remote` domain support using `OnOffPlugInUnit` for turn on/off actions
+- **Water Heater**: `water_heater` domain support using `ThermostatDevice` mapped to water heater operations
+
+#### Entity Overrides
+- **Device type override per entity**: New `entityOverrides` configuration allows overriding the Matter device type for specific entities (e.g., exposing a `switch` as a light)
+- Supports all 21 Matter device types: OnOffLight, DimmableLight, ColorTemperatureLight, ExtendedColorLight, OnOffPlugInUnit, DimmablePlugInUnit, DoorLock, WindowCovering, Thermostat, Fan, ContactSensor, OccupancySensor, TemperatureSensor, HumiditySensor, LightSensor, PressureSensor, Speaker, ModeSelect, GenericSwitch, WaterValve
+
+#### New Entity Filter Types
+- **Regex filter**: `regex` matcher type for advanced entity ID matching with full regular expression support
+- **Device Name filter**: `device_name` matcher type for filtering by Home Assistant device name (case-insensitive partial match)
+- **Device Class filter**: `device_class` matcher type for filtering by entity device class attribute
+
+### Changed
+
+- Update `@mui/icons-material`, `@mui/material` from 7.3.8 to 7.3.9
+- Update `@rjsf/core`, `@rjsf/mui`, `@rjsf/utils`, `@rjsf/validator-ajv8` from 6.3.1 to 6.4.2
+- Update `vite-plugin-svgr` from 4.5.0 to 5.0.0
+- Update `actions/deploy-pages` from 4 to 5
 
 ### Security
 
@@ -360,7 +389,7 @@ For users updating from previous versions:
 
 Previous version history unavailable. This project is a restart of the original home-assistant-matter-hub project.
 
-[2026.3.1]: https://github.com/SukramJ/home-assistant-matter-bridge/releases/tag/v2026.3.1
+[2026.4.0]: https://github.com/SukramJ/home-assistant-matter-bridge/releases/tag/v2026.4.0
 [2026.3.0]: https://github.com/SukramJ/home-assistant-matter-bridge/releases/tag/v2026.3.0
 [2026.2.1]: https://github.com/SukramJ/home-assistant-matter-bridge/releases/tag/v2026.2.1
 [2026.2.0]: https://github.com/SukramJ/home-assistant-matter-bridge/releases/tag/v2026.2.0
