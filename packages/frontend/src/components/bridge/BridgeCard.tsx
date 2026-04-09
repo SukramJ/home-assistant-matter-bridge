@@ -19,15 +19,17 @@ export const BridgeCard = ({ bridge }: BridgeCardProps) => {
     <Card variant="elevation">
       <CardActionArea component={RouterLink} to={navigation.bridge(bridge.id)}>
         <CardContent sx={{ display: "flex" }}>
-          <Box display="flex" alignItems="center">
+          <Box sx={{ display: "flex", alignItems: "center" }}>
             <QrCode sx={{ height: "3em", width: "3em" }} />
           </Box>
           <Box
-            pl={1}
-            display="flex"
-            flexDirection="column"
-            justifyContent="center"
-            flexGrow={1}
+            sx={{
+              pl: 1,
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              flexGrow: 1,
+            }}
           >
             <Typography>
               {bridge.name} <BridgeStatusIcon status={bridge.status} />
