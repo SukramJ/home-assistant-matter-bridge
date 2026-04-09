@@ -1,7 +1,7 @@
 import { BridgeStatus } from "@home-assistant-matter-bridge/common";
-import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
-import PauseCircleOutlineIcon from "@mui/icons-material/PauseCircleOutline";
-import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
+import ErrorOutlineOutlinedIcon from "@mui/icons-material/ErrorOutlineOutlined";
+import PauseCircleOutlinedIcon from "@mui/icons-material/PauseCircleOutlined";
+import PlayCircleOutlinedIcon from "@mui/icons-material/PlayCircleOutlined";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 
 export interface BridgeStatusIconProps {
@@ -14,10 +14,10 @@ export const BridgeStatusIcon = ({ status }: BridgeStatusIconProps) => {
     case BridgeStatus.Starting:
       return <RestartAltIcon fontSize="inherit" color="info" />;
     case BridgeStatus.Running:
-      return <PlayCircleOutlineIcon fontSize="inherit" color="success" />;
+      return <PlayCircleOutlinedIcon fontSize="inherit" color="success" />;
     case BridgeStatus.Stopped:
-      return <PauseCircleOutlineIcon fontSize="inherit" color="warning" />;
+      return <PauseCircleOutlinedIcon fontSize="inherit" color="warning" />;
     case BridgeStatus.Failed:
-      return <ErrorOutlineIcon fontSize="inherit" color="error" />;
+      return <ErrorOutlineOutlinedIcon fontSize="inherit" color="error" />;
   }
 };

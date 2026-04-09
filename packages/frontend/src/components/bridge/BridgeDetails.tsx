@@ -31,7 +31,7 @@ export const BridgeDetails = ({ bridge }: BridgeDetailsProps) => {
             <CommissioningInfo bridge={bridge} />
           </Grid>
         </Grid>
-        <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+        <Stack direction="row" spacing={1} useFlexGap sx={{ flexWrap: "wrap" }}>
           {bridge.filter.include.map((filter, idx) => (
             <Chip
               key={idx.toString()}
@@ -69,14 +69,16 @@ const Pairing = (props: { bridge: BridgeDataWithMetadata }) => {
     return "";
   }
   return (
-    <Box display="flex" justifyContent="center">
-      <Box position="relative" maxWidth="160px">
+    <Box sx={{ display: "flex", justifyContent: "center" }}>
+      <Box sx={{ position: "relative", maxWidth: "160px" }}>
         {props.bridge.commissioning.isCommissioned && (
           <Box
-            position="absolute"
-            top="50%"
-            left="50%"
-            sx={{ transform: "translate(-50%, -50%) rotate(-45deg)" }}
+            sx={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%) rotate(-45deg)",
+            }}
           >
             <Alert color="success" variant="filled">
               <Typography

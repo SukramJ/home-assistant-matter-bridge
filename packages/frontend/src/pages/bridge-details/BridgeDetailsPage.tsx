@@ -71,7 +71,7 @@ export const BridgeDetailsPage = () => {
         ]}
       />
 
-      <Box display="flex" justifyContent="space-between">
+      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <Typography variant="h4">
           {bridge.name} <BridgeStatusIcon status={bridge.status} />
         </Typography>
@@ -84,7 +84,13 @@ export const BridgeDetailsPage = () => {
 
       {devices && (
         <Stack spacing={2}>
-          <Box display="flex" justifyContent="flex-end" alignItems="center">
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "flex-end",
+              alignItems: "center",
+            }}
+          >
             {timer != null && (
               <Tooltip title="New devices and changes on labels are discovered every 30 seconds.">
                 <Typography variant="body2" color="textSecondary">

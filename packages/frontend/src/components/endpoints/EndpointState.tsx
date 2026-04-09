@@ -120,7 +120,7 @@ const RenderProperty = (props: { property: unknown }) => {
     }
   }, [props.property]);
   return (
-    <Typography fontFamily="monospace" fontSize="0.9em">
+    <Typography sx={{ fontFamily: "monospace", fontSize: "0.9em" }}>
       {value}
     </Typography>
   );

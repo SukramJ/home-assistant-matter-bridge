@@ -108,7 +108,7 @@ export function Logs() {
           <CardContent>
             <Stack spacing={2}>
               <Typography variant="h6">Filters</Typography>
-              <Stack direction="row" spacing={2} flexWrap="wrap">
+              <Stack direction="row" spacing={2} sx={{ flexWrap: "wrap" }}>
                 <FormControl sx={{ minWidth: 150 }}>
                   <InputLabel>Log Level</InputLabel>
                   <Select

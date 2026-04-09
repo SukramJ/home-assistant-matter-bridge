@@ -57,14 +57,16 @@ const EndpointTreeItem = (props: EndpointTreeItemProps) => {
 
 const EndpointTreeItemLabel = (props: EndpointTreeItemProps) => {
   return (
-    <Box display="flex">
+    <Box sx={{ display: "flex" }}>
       <EndpointIcon endpoint={props.endpoint} />
       <Box
-        marginLeft={1}
         component="span"
-        whiteSpace="nowrap"
-        textOverflow="ellipsis"
-        overflow="hidden"
+        sx={{
+          marginLeft: 1,
+          whiteSpace: "nowrap",
+          textOverflow: "ellipsis",
+          overflow: "hidden",
+        }}
       >
         <EndpointName endpoint={props.endpoint} />
       </Box>

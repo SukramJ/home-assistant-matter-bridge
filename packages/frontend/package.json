@@ -19,9 +19,9 @@
     "@emotion/styled": "^11.14.1",
     "@fontsource/roboto": "^5.2.10",
     "@home-assistant-matter-bridge/common": "workspace:*",
-    "@mui/icons-material": "^7.3.9",
-    "@mui/material": "^7.3.9",
-    "@mui/x-tree-view": "^8.27.2",
+    "@mui/icons-material": "^9.0.0",
+    "@mui/material": "^9.0.0",
+    "@mui/x-tree-view": "^9.0.1",
     "@reduxjs/toolkit": "^2.11.2",
     "@rjsf/core": "^6.4.2",
     "@rjsf/mui": "^6.4.2",
@@ -35,11 +35,11 @@
     "json-schema": "^0.4.0",
     "lodash": "^4.18.1",
     "qrcode.react": "^4.2.0",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
     "react-markdown": "^10.1.0",
     "react-redux": "^9.2.0",
-    "react-router": "^7.13.2",
+    "react-router": "^7.14.0",
     "rehype-github-alerts": "^4.2.0",
     "remark-gfm": "^4.0.1"
   },
@@ -52,8 +52,8 @@
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react-swc": "^4.3.0",
-    "@vitest/coverage-v8": "^4.1.2",
-    "jsdom": "^29.0.1",
-    "vite-plugin-svgr": "^5.0.0"
+    "@vitest/coverage-v8": "^4.1.3",
+    "jsdom": "^29.0.2",
+    "vite-plugin-svgr": "^5.2.0"
   }
 }

@@ -89,7 +89,7 @@ export const BridgeConfigEditor = (props: BridgeConfigEditorProps) => {
       </Alert>
 
       <Stack spacing={2}>
-        <Box display="flex" justifyContent={"flex-end"}>
+        <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
           <Button
             onClick={() => toggleEditor()}
             title={

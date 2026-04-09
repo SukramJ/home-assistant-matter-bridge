@@ -84,7 +84,7 @@ export function SystemInfo() {
           </Typography>
         </Box>
 
-        <Stack direction="row" spacing={2} alignItems="center">
+        <Stack direction="row" spacing={2} sx={{ alignItems: "center" }}>
           <Button
             variant="contained"
             startIcon={<RefreshIcon />}
@@ -226,8 +226,7 @@ export function SystemInfo() {
                     <Stack
                       direction="row"
                       spacing={1}
-                      flexWrap="wrap"
-                      sx={{ mt: 1 }}
+                      sx={{ flexWrap: "wrap", mt: 1 }}
                     >
                       <Chip
                         label={`RSS: ${formatBytes(systemInfo.memory.process.rss)}`}
@@ -411,7 +410,7 @@ export function SystemInfo() {
                   {Object.entries(systemInfo.network.interfaces).map(
                     ([name, addrs]) => (
                       <Box key={name}>
-                        <Typography variant="body2" fontWeight="bold">
+                        <Typography variant="body2" sx={{ fontWeight: "bold" }}>
                           {name}
                         </Typography>
                         {addrs.map((addr) => (
