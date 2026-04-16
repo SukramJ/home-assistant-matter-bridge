@@ -133,7 +133,7 @@ jobs:
           path: apps/home-assistant-matter-bridge/package.tgz
 
       - name: Upload Documentation
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@v5
         with:
           path: "./docs/_build/html"
 
