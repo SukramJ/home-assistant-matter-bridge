@@ -6,7 +6,6 @@ import {
 import type { ClusterBehavior, EndpointType } from "@matter/main";
 import type { Thermostat } from "@matter/main/clusters";
 import { ThermostatDevice } from "@matter/main/devices";
-import type { ClusterType } from "@matter/main/types";
 import { InvalidDeviceError } from "../../../../utils/errors/invalid-device-error.js";
 import type { FeatureSelection } from "../../../../utils/feature-selection.js";
 import { testBit } from "../../../../utils/test-bit.js";
@@ -21,8 +20,7 @@ function thermostatFeatures(
   supportsCooling: boolean,
   supportsHeating: boolean,
 ) {
-  const features: FeatureSelection<ClusterType.Of<Thermostat.Complete>> =
-    new Set();
+  const features: FeatureSelection<typeof Thermostat.Complete> = new Set();
   if (supportsCooling) {
     features.add("Cooling");
   }

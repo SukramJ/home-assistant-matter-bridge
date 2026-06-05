@@ -9,7 +9,7 @@ import { LightLevelControlServer } from "../behaviors/light-level-control-server
 import { LightOnOffServer } from "../behaviors/light-on-off-server.js";
 
 export const ExtendedColorLightType = (supportsTemperature: boolean) => {
-  const features: FeatureSelection<ColorControl.Cluster> = new Set([
+  const features: FeatureSelection<typeof ColorControl.Cluster> = new Set([
     "HueSaturation",
   ]);
   if (supportsTemperature) {

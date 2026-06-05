@@ -20,7 +20,7 @@ export function FanDevice(
     .attributes as FanDeviceAttributes;
   const supportedFeatures = attributes.supported_features ?? 0;
 
-  const features: FeatureSelection<FanControl.Cluster> = new Set();
+  const features: FeatureSelection<typeof FanControl.Cluster> = new Set();
   if (testBit(supportedFeatures, FanDeviceFeature.SET_SPEED)) {
     features.add("MultiSpeed");
   }

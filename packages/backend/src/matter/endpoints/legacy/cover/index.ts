@@ -13,28 +13,15 @@ import { IdentifyServer } from "../../../behaviors/identify-server.js";
 import { CoverWindowCoveringServer } from "./behaviors/cover-window-covering-server.js";
 
 const CoverDeviceType = (supportedFeatures: number) => {
-  const features: FeatureSelection<WindowCovering.Complete> = new Set();
+  const features: FeatureSelection<typeof WindowCovering.Complete> = new Set();
   if (testBit(supportedFeatures, CoverSupportedFeatures.support_open)) {
     features.add("Lift");
     features.add("PositionAwareLift");
-    if (
-      testBit(supportedFeatures, CoverSupportedFeatures.support_set_position)
-    ) {
-      features.add("AbsolutePosition");
-    }
   }
 
   if (testBit(supportedFeatures, CoverSupportedFeatures.support_open_tilt)) {
     features.add("Tilt");
     features.add("PositionAwareTilt");
-    if (
-      testBit(
-        supportedFeatures,
-        CoverSupportedFeatures.support_set_tilt_position,
-      )
-    ) {
-      features.add("AbsolutePosition");
-    }
   }
 
   return WindowCoveringDevice.with(
