@@ -78,7 +78,9 @@ export namespace LevelControlServerBase {
   }
 }
 
-export type LevelControlFeatures = FeatureSelection<LevelControl.Cluster>;
+export type LevelControlFeatures = FeatureSelection<
+  typeof LevelControl.Cluster
+>;
 
 export function LevelControlServer(config: LevelControlConfig) {
   return LevelControlServerBase.set({
