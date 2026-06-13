@@ -36,7 +36,7 @@
     "@swc-node/register": "~1.11.1",
     "@swc/core": "~1.15.41",
     "@swc/helpers": "~0.5.23",
-    "esbuild": "^0.28.0",
+    "esbuild": "^0.28.1",
     "esbuild-plugin-noexternal": "^0.1.6",
     "globals": "^17.6.0",
     "nodemon": "^3.1.14",
