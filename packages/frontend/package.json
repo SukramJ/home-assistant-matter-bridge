@@ -19,9 +19,9 @@
     "@emotion/styled": "^11.14.1",
     "@fontsource/roboto": "^5.2.10",
     "@home-assistant-matter-bridge/common": "workspace:*",
-    "@mui/icons-material": "^9.1.0",
-    "@mui/material": "^9.1.0",
-    "@mui/x-tree-view": "^9.4.0",
+    "@mui/icons-material": "^9.1.1",
+    "@mui/material": "^9.1.2",
+    "@mui/x-tree-view": "^9.6.0",
     "@reduxjs/toolkit": "^2.12.0",
     "@rjsf/core": "^6.6.2",
     "@rjsf/mui": "^6.6.2",
@@ -39,7 +39,7 @@
     "react-dom": "^19.2.7",
     "react-markdown": "^10.1.0",
     "react-redux": "^9.3.0",
-    "react-router": "^7.17.0",
+    "react-router": "^8.0.1",
     "rehype-github-alerts": "^4.2.0",
     "remark-gfm": "^4.0.1"
   },
@@ -52,7 +52,7 @@
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react-swc": "^4.3.1",
-    "@vitest/coverage-v8": "^4.1.8",
+    "@vitest/coverage-v8": "^4.1.9",
     "jsdom": "^29.1.1",
     "vite-plugin-svgr": "^5.2.0"
   }

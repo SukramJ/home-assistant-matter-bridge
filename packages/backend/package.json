@@ -13,9 +13,9 @@
   },
   "dependencies": {
     "@home-assistant-matter-bridge/common": "workspace:*",
-    "@matter/general": "0.17.2",
-    "@matter/main": "0.17.2",
-    "@matter/nodejs": "0.17.2",
+    "@matter/general": "0.17.3",
+    "@matter/main": "0.17.3",
+    "@matter/nodejs": "0.17.3",
     "ajv": "8.20.0",
     "color": "5.0.3",
     "debounce": "3.0.0",
@@ -40,7 +40,7 @@
     "@types/supertest": "^7.2.0",
     "@types/ws": "^8.18.1",
     "@types/yargs": "^17.0.35",
-    "@vitest/coverage-v8": "^4.1.8",
+    "@vitest/coverage-v8": "^4.1.9",
     "supertest": "^7.2.2"
   }
 }
