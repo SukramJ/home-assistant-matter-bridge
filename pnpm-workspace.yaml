@@ -7,6 +7,8 @@ allowBuilds:
   '@swc/core': true
   esbuild: true
   oxc-resolver: true
+  # postinstall only prints a funding notice; no build needed
+  core-js-pure: false
 
 minimumReleaseAgeExclude:
   - tsx@4.22.2
