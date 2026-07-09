@@ -46,7 +46,7 @@ jobs:
       release-version: ${{ inputs.version }}
       release-channel: ${{ inputs.channel }}
     steps:
-      - uses: actions/checkout@v6.0.3
+      - uses: actions/checkout@v7.0.0
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -143,7 +143,7 @@ jobs:
     outputs:
       dockerfiles: ${{ steps.dockerfiles.outputs.dockerfiles }}
     steps:
-      - uses: actions/checkout@v6.0.3
+      - uses: actions/checkout@v7.0.0
       - name: Find Dockerfiles
         id: dockerfiles
         uses: ./.github/actions/find-dockerfiles
@@ -158,13 +158,13 @@ jobs:
       matrix:
         dockerfile: ${{ fromJSON(needs.prepare-docker.outputs.dockerfiles) }}
     steps:
-      - uses: actions/checkout@v6.0.3
+      - uses: actions/checkout@v7.0.0
 
       - name: Setup Docker
         uses: ./.github/actions/setup-docker
 
       - name: Login to GitHub Container Registry
-        uses: docker/login-action@650006c6eb7dba73a995cc03b0b2d7f5ca915bee  # v4
+        uses: docker/login-action@c99871dec2022cc055c062a10cc1a1310835ceb4  # v4
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
@@ -205,7 +205,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v6.0.3
+      - uses: actions/checkout@v7.0.0
         with:
           ref: main
           token: ${{ secrets.GITHUB_TOKEN }}
