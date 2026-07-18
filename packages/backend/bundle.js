@@ -3,13 +3,9 @@ import path from "node:path";
 import esbuild from "esbuild";
 import externalizeAllPackagesExcept from "esbuild-plugin-noexternal";
 import { rimraf } from "rimraf";
-import tsc from "typescript";
 
 const src = path.resolve(import.meta.dirname, "src");
 const dist = path.resolve(import.meta.dirname, "dist");
-const tsconfig = JSON.parse(
-  fs.readFileSync("./tsconfig.json", { encoding: "utf8" }),
-);
 
 await rimraf(dist);
 await buildBackend();
@@ -32,12 +28,11 @@ async function buildBackend() {
     ],
   });
 
-  const bootstrapFile = tsc.transpile(
+  const bootstrapFile = esbuild.transformSync(
     fs.readFileSync(path.resolve(src, "bootstrap.ts"), { encoding: "utf-8" }),
-    tsconfig.compilerOptions,
-    "bootstrap.mts",
+    { loader: "ts", format: "esm", target: "node20" },
   );
-  fs.writeFileSync(path.resolve(dist, "bootstrap.js"), bootstrapFile);
+  fs.writeFileSync(path.resolve(dist, "bootstrap.js"), bootstrapFile.code);
 
   const stat = fs.statSync(path.resolve(dist, "cli.js"));
   process.stdout.write(`Done (${stat.size / 1024} KB)\n`);
