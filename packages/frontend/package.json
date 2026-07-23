@@ -21,7 +21,7 @@
     "@home-assistant-matter-bridge/common": "workspace:*",
     "@mui/icons-material": "^9.2.0",
     "@mui/material": "^9.2.0",
-    "@mui/x-tree-view": "^9.8.0",
+    "@mui/x-tree-view": "^9.9.0",
     "@reduxjs/toolkit": "^2.12.0",
     "@rjsf/core": "^6.6.2",
     "@rjsf/mui": "^6.6.2",
