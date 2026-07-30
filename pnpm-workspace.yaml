@@ -10,6 +10,12 @@ allowBuilds:
   # postinstall only prints a funding notice; no build needed
   core-js-pure: false
 
+# 7 days (10080 minutes), matching the Dependabot cooldown in .github/dependabot.yml.
+# Note: `npm-check-updates` writes entries into minimumReleaseAgeExclude when an
+# upgrade it wants to apply violates this policy. Always review the diff of this
+# file when running `pnpm run check-updates`.
+minimumReleaseAge: 10080
+
 minimumReleaseAgeExclude:
   - tsx@4.22.2
 

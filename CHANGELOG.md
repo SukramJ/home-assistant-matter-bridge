@@ -5,6 +5,36 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Calendar Versioning](https://calver.org/) (YYYY.M.patch).
 
+## [2026.7.0] - 2026-07-30
+
+### Changed
+
+#### Dependency Updates
+- **Matter.js**: `@matter/general`, `@matter/main`, `@matter/nodejs` 0.17.4 → 0.17.6
+- **React**: `react`, `react-dom` 19.2.7 → 19.2.8
+- **Build tooling**: `vite` 8.1.3 → 8.1.5, `@vitejs/plugin-react-swc` 4.3.1 → 4.3.2, `@swc/core` 1.15.43 → 1.15.46, `@swc-node/register` 1.11.1 → 1.12.1, `tsx` 4.23.0 → 4.23.1
+- **Linting**: `@biomejs/biome` 2.5.3 → 2.5.5
+- **Forms**: `@rjsf/core`, `@rjsf/mui`, `@rjsf/utils`, `@rjsf/validator-ajv8` 6.6.2 → 6.7.0
+- **UI**: `@mui/x-tree-view` 9.8.0 → 9.10.0, `@fontsource/roboto` 5.2.10 → 5.3.0
+- **Routing**: `react-router` 8.2.0 → 8.3.0
+- **CLI/Runtime**: `ws` 8.21.0 → 8.21.1, `@dotenvx/dotenvx` 2.3.1 → 2.17.2
+- **Types**: `@types/supertest` 7.2.0 → 7.2.1
+- **Package manager**: pnpm 11.1.3 → 11.18.0
+
+#### Major Dependency Upgrades
+- **@testing-library/jest-dom** 6.9.1 → 7.0.0 (test matchers)
+
+#### Configuration
+- **Supply-chain policy**: Added `minimumReleaseAge: 10080` (7 days) to `pnpm-workspace.yaml`, aligning the local install policy with the existing 7-day Dependabot `cooldown`. `pnpm install` now rejects any lockfile entry published within the last 7 days.
+- Migrated `biome.json` linter config from the deprecated `rules.recommended` field to `rules.preset` (required by the next Biome major)
+- Reformatted `it.each(...)` call sites in two backend test files to satisfy the Biome formatter (whitespace only)
+- Regenerated `pnpm-lock.yaml` from a fresh resolution so every entry satisfies the new 7-day policy
+
+#### Deferred by Cooldown
+The following updates were available but are newer than the 7-day policy and were intentionally not adopted. Dependabot will pick them up once they age out:
+- `jsdom` 30.0.1 (major, kept at 29.1.1), `npm-check-updates` 23.0.0 (major, kept at 22.2.9)
+- `@matter/*` 0.17.7, `@biomejs/biome` 2.5.6, `@swc/core` 1.15.47, `@dotenvx/dotenvx` 2.19.1, `@rjsf/*` 6.7.1, `@mui/x-tree-view` 9.10.1, `yargs` 18.1.0, `globals` 17.8.0, `clipboardy` 5.3.2
+
 ## [2026.4.0] - 2026-04-08
 
 ### Added
@@ -389,6 +419,7 @@ For users updating from previous versions:
 
 Previous version history unavailable. This project is a restart of the original home-assistant-matter-hub project.
 
+[2026.7.0]: https://github.com/SukramJ/home-assistant-matter-bridge/releases/tag/v2026.7.0
 [2026.4.0]: https://github.com/SukramJ/home-assistant-matter-bridge/releases/tag/v2026.4.0
 [2026.3.0]: https://github.com/SukramJ/home-assistant-matter-bridge/releases/tag/v2026.3.0
 [2026.2.1]: https://github.com/SukramJ/home-assistant-matter-bridge/releases/tag/v2026.2.1
