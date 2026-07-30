@@ -35,12 +35,13 @@ function createEntity(entityId: string): {
 describe("createOverrideEndpointType", () => {
   const testEntity = createEntity("switch.test");
 
-  it.each(
-    Object.values(MatterDeviceType),
-  )("should create endpoint for device type: %s", (deviceType) => {
-    const result = createOverrideEndpointType(deviceType, testEntity);
-    expect(result).toBeDefined();
-  });
+  it.each(Object.values(MatterDeviceType))(
+    "should create endpoint for device type: %s",
+    (deviceType) => {
+      const result = createOverrideEndpointType(deviceType, testEntity);
+      expect(result).toBeDefined();
+    },
+  );
 
   it("should return undefined for unknown device type", () => {
     const result = createOverrideEndpointType(

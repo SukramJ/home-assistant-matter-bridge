@@ -15,9 +15,12 @@ describe("FanMode", () => {
       [MFanMode.Low, FanModeSequence.OffLowHigh, 50],
       [MFanMode.Medium, FanModeSequence.OffLowHigh, 50],
       [MFanMode.High, FanModeSequence.OffLowHigh, 100],
-    ])("should determine the correct speed (%s & %s)", (mode, sequence, expected) => {
-      expect(FanMode.create(mode, sequence).speedPercent()).toEqual(expected);
-    });
+    ])(
+      "should determine the correct speed (%s & %s)",
+      (mode, sequence, expected) => {
+        expect(FanMode.create(mode, sequence).speedPercent()).toEqual(expected);
+      },
+    );
   });
 
   describe("fromSpeedPercent", () => {
@@ -34,11 +37,16 @@ describe("FanMode", () => {
       [75, MFanMode.High],
       [90, MFanMode.High],
       [100, MFanMode.High],
-    ])("should return correct mode for sequence (%s -> %s)", (percentage, expected) => {
-      expect(
-        FanMode.fromSpeedPercent(percentage, FanModeSequence.OffLowMedHighAuto)
-          .mode,
-      ).toEqual(expected);
-    });
+    ])(
+      "should return correct mode for sequence (%s -> %s)",
+      (percentage, expected) => {
+        expect(
+          FanMode.fromSpeedPercent(
+            percentage,
+            FanModeSequence.OffLowMedHighAuto,
+          ).mode,
+        ).toEqual(expected);
+      },
+    );
   });
 });
