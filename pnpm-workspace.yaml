@@ -17,17 +17,14 @@ allowBuilds:
 minimumReleaseAge: 10080
 
 minimumReleaseAgeExclude:
-  - tsx@4.22.2
-  # Security fixes released 2026-07-31, needed before the cooldown expires.
-  - js-yaml@4.3.1
-  - fast-uri@3.1.5
-  - fast-uri@4.1.2
+  # Security fix released 2026-08-29, needed before the cooldown expires.
+  - qs@6.16.0
 
 # see: https://github.com/sukramj/home-assistant-matter-bridge/security/dependabot
 overrides:
   # General overrides (migrated from package.json pnpm.overrides; ignored there in pnpm 11)
   ajv: ">=8.20.0"
-  qs: ">=6.15.2"
+  qs: ">=6.16.0"
   js-yaml: "^4.3.1"
   mdast-util-to-hast: ">=13.2.1"
   undici: "^7.29.0"
@@ -39,14 +36,15 @@ overrides:
   "@babel/core": "^7.29.6"
   "@codemirror/view": "6.43.0"
   path-to-regexp: ">=8.4.2"
-  brace-expansion: ">=5.0.6"
+  brace-expansion: ">=5.0.9"
   yaml: ">=2.9.0"
   postcss: ">=8.5.23"
   # Range-specific security overrides (dependabot)
   "form-data@>=4.0.0 <4.0.6": "4.0.6"
   "tmp@<=0.2.4": "0.2.5"
-  "brace-expansion@>=1.0.0 <=1.1.11": "1.1.12"
-  "brace-expansion@>=2.0.0 <=2.0.1": "2.0.2"
+  "brace-expansion@>=1.0.0 <1.1.18": "1.1.18"
+  "brace-expansion@>=2.0.0 <2.1.4": "2.1.4"
+  "brace-expansion@>=3.0.0 <3.0.6": "3.0.6"
   # fast-uri: both major lines are in use (ajv -> 3.x, @rjsf/utils -> 4.x)
-  "fast-uri@>=3.0.0 <3.1.5": "3.1.5"
-  "fast-uri@>=4.0.0 <4.1.2": "4.1.2"
+  "fast-uri@>=3.0.0 <3.1.6": "3.1.6"
+  "fast-uri@>=4.0.0 <4.1.3": "4.1.3"
