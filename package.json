@@ -31,10 +31,10 @@
     "docs"
   ],
   "devDependencies": {
-    "@biomejs/biome": "^2.5.11",
+    "@biomejs/biome": "^2.5.12",
     "@dotenvx/dotenvx": "^2.23.0",
     "@swc-node/register": "~1.12.1",
-    "@swc/core": "~1.16.1",
+    "@swc/core": "~1.16.2",
     "@swc/helpers": "~0.5.23",
     "esbuild": "^0.28.2",
     "esbuild-plugin-noexternal": "^0.1.6",
@@ -45,6 +45,6 @@
     "tsx": "^4.23.13",
     "typescript": "^7.0.2",
     "vite": "^8.2.2",
-    "vitest": "^4.1.11"
+    "vitest": "^5.0.0"
   }
 }
