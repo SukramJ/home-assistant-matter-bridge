@@ -4,6 +4,14 @@
 
 ---
 
+> [!WARNING]
+> **This project is no longer maintained and has been archived.**
+>
+> Please use [Home Assistant Matter Hub](https://github.com/RiDDiX/home-assistant-matter-hub/)
+> by [RiDDiX](https://github.com/RiDDiX) instead.
+
+---
+
 ## About
 
 This project simulates bridges to publish your entities from Home Assistant to any Matter-compatible controller like
@@ -27,12 +35,14 @@ known issues, limitations and guides.
 
 ---
 
-## Add-on Installation
+## Migrating from the Add-on
 
-This repository can be added directly as a Home Assistant Add-on repository:
+The add-on will not receive any further updates. To switch:
 
-1. **Settings** → **Add-ons** → **Add-on Store**
-2. Click **⋮** (menu top right) → **Repositories**
-3. Add this repository URL
+1. Install Home Assistant Matter Hub as described in its
+   [README](https://github.com/RiDDiX/home-assistant-matter-hub/#installation).
+2. **Settings** → **Add-ons** → uninstall **Home-Assistant-Matter-Bridge**
+3. **Settings** → **Add-ons** → **Add-on Store** → **⋮** (menu top right) →
+   **Repositories** → remove this repository
 
 ---

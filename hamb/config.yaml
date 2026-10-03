@@ -3,7 +3,7 @@ version: "2026.7.0"
 image: ghcr.io/sukramj/home-assistant-matter-bridge-addon
 slug: hamb
 name: Home-Assistant-Matter-Bridge
-description: Publish your entities from Home Assistant to any Matter-compatible controller like Alexa, Apple Home or Google Home.
+description: Deprecated – use RiDDiX/home-assistant-matter-hub. Publish your entities from Home Assistant to any Matter-compatible controller like Alexa, Apple Home or Google Home.
 url: https://github.com/sukramj/home-assistant-matter-bridge
 panel_icon: mdi:hub
 panel_title: Matter Bridge
