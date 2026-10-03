@@ -13,7 +13,7 @@ overrides:
   '@isaacs/brace-expansion': '>=5.0.1'
   minimatch: '>=10.2.5'
   rollup: '>=4.60.4'
-  markdown-it: '>=14.2.0'
+  markdown-it: '>=14.3.2 <15'
   linkify-it: ^5.0.1
   '@babel/core': ^7.29.6
   '@codemirror/view': 6.43.0
@@ -2962,8 +2962,8 @@ packages:
   magicast@0.5.5:
     resolution: {integrity: sha512-UicdXN8zQ3JHlxVq+28afMXPr1z7WNY6+7EJnzTdQWkTAlMLF5fNCCKxJHBQwGaNGR11581EiQmQzx73+MvszA==}
 
-  markdown-it@14.3.0:
-    resolution: {integrity: sha512-RCEsPjR+sr0x+AuYp601tKTkgFG4YEPLCzHST3cQ/fhlJkqAkz1L2/Qbp1j9qw5SBwQHFBoW8+hoN5xssOF0Tw==}
+  markdown-it@14.3.2:
+    resolution: {integrity: sha512-sHHjZ5fJKlgrG4qns2YwVcdNep35h5fERrfkD2YNsb9UFk0UIHarbiTaHKVMlPuWAoiilyK8Fv/jAm11slsY7Q==}
     hasBin: true
 
   markdown-table@3.0.4:
@@ -5043,7 +5043,7 @@ snapshots:
 
   '@shikijs/markdown-it@1.29.2':
     dependencies:
-      markdown-it: 14.3.0
+      markdown-it: 14.3.2
       shiki: 1.29.2
 
   '@shikijs/themes@1.29.2':
@@ -5738,7 +5738,7 @@ snapshots:
       json-schema: 0.4.0
       json-schema-library: 9.3.5
       loglevel: 1.9.2
-      markdown-it: 14.3.0
+      markdown-it: 14.3.2
       shiki: 1.29.2
       yaml: 2.9.0
     optionalDependencies:
@@ -6573,7 +6573,7 @@ snapshots:
       '@babel/types': 7.29.7
       source-map-js: 1.2.1
 
-  markdown-it@14.3.0:
+  markdown-it@14.3.2:
     dependencies:
       argparse: 2.0.1
       entities: 4.5.0
